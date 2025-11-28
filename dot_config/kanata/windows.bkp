@@ -1,0 +1,154 @@
+;; Kanata Config: Windows + Mac Muscle Memory + Smart Shift
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  danger-enable-cmd yes
+)
+
+(defsrc
+  caps
+  lsft lalt lmet lctl
+  spc
+  ralt rmet
+  f5 g z o q c f d m p t
+  h j k l b w
+  0 1 2 3 4 5 6 7
+  left down up right
+  return
+  [ ] ; = -
+  i r x y
+)
+
+
+(defalias
+    ;; --- LAYERS & SPECIALS ---
+    wdmgmt (tap-hold 200 200 esc (layer-toggle window_c))
+    spc_layer (tap-hold-press 200 200 spc (layer-toggle extended))
+    os_app (one-shot 1000 (layer-toggle launcher))
+    smart_thumb (tap-hold-press 200 200 @os_app lctl)
+    smart_thumb_r (tap-hold-press 200 200 @os_app rctl)
+
+    ;; Smart Shift
+
+    ;; --- SMART SHIFT COMPONENTS ---
+    ;; 1. One Shot Shift: Stays active for 1000ms after tapping
+    oneshot_sft (one-shot 1000 lsft)
+
+    ;; 2. Caps Word: specialized caps lock that turns off after 2s or non-alpha key
+    caps_wrd    (caps-word 2000)
+
+    ;; 3. The Dance: Tap 1x = OneShot, Tap 2x = CapsWord
+    ;; IMPORTANT: Actions must be inside ( ... )
+    sft_dance   (tap-dance 500 (@oneshot_sft @caps_wrd))
+
+    ;; 4. The Hold: Tap = Dance, Hold = Normal Shift
+    smart_sft   (tap-hold 200 200 @sft_dance lsft)
+
+
+  ;; --- APP SHORTCUTS ---
+  term M-C-S-A-g
+  web  M-C-S-A-z
+  ocr  M-C-S-A-o
+  shot S-M-s
+  kill A-f4
+  code M-C-S-A-c
+  dnld (cmd Fpilot "C:\Users\barbo\Downloads")
+  mail M-C-S-A-m
+  todo M-C-S-A-t
+  file M-C-S-A-f
+  clip M-C-S-A-p
+  )
+
+
+(deflayermap (main)
+  caps @wdmgmt
+
+  lsft @smart_sft
+  lalt @smart_thumb
+  lmet lalt
+  lctl lmet
+  spc @spc_layer
+  ralt @smart_thumb_r
+  rmet ralt
+
+)
+(deflayermap (launcher)
+g @term
+z @web
+o @ocr
+q @kill
+c @code
+f @file
+j @dnld
+m @mail
+p @clip
+t @todo
+)
+
+
+(deflayermap (extended)
+caps caps
+f5 lrld
+
+;;vim movement
+h left
+j down
+k up
+l right
+b C-left
+w C-right
+)
+
+(deflayermap (window_c)
+f5  (cmd komorebic reload-configuration)
+i    (cmd komorebic toggle-shortcuts)
+q    (cmd komorebic close)
+m    (cmd komorebic minimize)
+h    (cmd komorebic focus left)
+j    (cmd komorebic focus down)
+k    (cmd komorebic focus up)
+l    (cmd komorebic focus right)
+[    (cmd komorebic cycle-focus previous)
+]    (cmd komorebic cycle-focus next)
+return    (cmd komorebic promote)
+left   (cmd komorebic stack left)
+down    (cmd komorebic stack down)
+up    (cmd komorebic stack up)
+right    (cmd komorebic stack right)
+;    (cmd komorebic unstack)
+.    (cmd komorebic toggle-monocle)
+=    (cmd komorebic resize-axis horizontal increase)
+-    (cmd komorebic resize-axis horizontal decrease)
+t    (cmd komorebic toggle-float)
+r    (cmd komorebic retile)
+p    (cmd komorebic toggle-pause)
+x    (cmd komorebic flip-layout horizontal)
+y    (cmd komorebic flip-layout vertical)
+1    (cmd komorebic focus-workspace I)
+2   (cmd komorebic focus-workspace 2)
+3    (cmd komorebic focus-workspace 3)
+4    (cmd komorebic focus-workspace 4)
+5    (cmd komorebic focus-workspace 5)
+6    (cmd komorebic focus-workspace 6)
+7    (cmd komorebic focus-workspace 7)
+a    (layer-while-held window_cs)
+)
+
+(deflayermap (window_cs)
+h    (cmd komorebic move left)
+j    (cmd komorebic move down)
+k    (cmd komorebic move up)
+l    (cmd komorebic move right)
+[    (cmd komorebic cycle-stack previous)
+]    (cmd komorebic cycle-stack next)
+=    (cmd komorebic resize-axis vertical increase)
+-    (cmd komorebic resize-axis vertical decrease)
+1    (cmd komorebic move-to-workspace 1)
+2    (cmd komorebic move-to-workspace 2)
+3    (cmd komorebic move-to-workspace 3)
+4    (cmd komorebic move-to-workspace 4)
+5    (cmd komorebic move-to-workspace 5)
+6    (cmd komorebic move-to-workspace 6)
+7    (cmd komorebic move-to-workspace 7)
+)
