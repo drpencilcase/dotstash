@@ -3775,3 +3775,52 @@ RuntimeError: wrapped C/C++ object of type AudioInputService has been deleted
 2025-11-27 18:48:04,953 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 18:48:04.953678
 2025-11-27 18:58:04,960 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 18:58:04.959939
 2025-11-27 19:08:04,991 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 19:08:04.991596
+2025-11-27 19:18:04,942 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 19:18:04.942626
+2025-11-27 19:28:04,963 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 19:28:04.963447
+2025-11-27 19:34:55,090 [INFO] [MainThread] [root/bar.py:154]: Screen geometry changed. Updating position for bar status-bar on screen AW3225QF
+2025-11-27 19:38:04,963 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 19:38:04.963204
+2025-11-27 19:49:08,739 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 19:49:08.739951
+2025-11-27 19:59:05,722 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 19:59:05.722700
+2025-11-27 20:10:10,749 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 20:10:10.748988
+2025-11-27 20:20:07,706 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 20:20:07.706869
+2025-11-27 20:49:15,784 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 20:49:15.784612
+2025-11-27 20:59:12,698 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 20:59:12.698853
+2025-11-27 21:29:33,742 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 21:29:33.742572
+2025-11-27 21:30:30,384 [INFO] [MainThread] [root/bar.py:154]: Screen geometry changed. Updating position for bar status-bar on screen AW3225QF
+2025-11-27 21:39:30,705 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 21:39:30.705782
+2025-11-27 21:49:30,698 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 21:49:30.698637
+2025-11-27 22:00:37,136 [INFO] [MainThread] [root/log.py:69]: YASB v1.8.5
+2025-11-27 22:00:37,137 [INFO] [Thread-1 (_run_server)] [cli_server/cli_server.py:212]: CLI server started v1.1.4
+2025-11-27 22:00:37,137 [INFO] [MainThread] [cli_server/cli_server.py:104]: Log pipe server started
+2025-11-27 22:00:37,514 [INFO] [MainThread] [root/service.py:48]: AudioOutputService starting...
+2025-11-27 22:00:37,560 [INFO] [MainThread] [root/service.py:39]: AudioInputService starting...
+2025-11-27 22:00:37,984 [INFO] [MainThread] [root/bar_manager.py:85]: Starting SystemEventListener...
+2025-11-27 22:00:37,984 [INFO] [MainThread] [root/bar_manager.py:85]: Starting KomorebiEventListener...
+2025-11-27 22:00:37,990 [INFO] [Dummy-4] [root/event_listener.py:51]: Created named pipe yasb-6aa983fa-cc06-11f0-958b-50bbb5222701
+2025-11-27 22:00:37,990 [INFO] [MainThread] [root/watcher.py:54]: Created file watcher for path C:\Users\barbo\.config\yasb
+2025-11-27 22:00:38,042 [DEBUG] [MainThread] [qasync._windows._EventPoller/_windows.py:215]: Starting (proactor: <_IocpProactor overlapped#=0 result#=0>)...
+2025-11-27 22:00:38,043 [DEBUG] [Dummy-9] [qasync._windows._EventWorker/_windows.py:195]: Thread started
+2025-11-27 22:00:38,355 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 22:00:38.355543
+2025-11-27 22:01:33,817 [INFO] [Dummy-4] [root/event_listener.py:125]: Komorebi connected to named pipe: yasb-6aa983fa-cc06-11f0-958b-50bbb5222701
+2025-11-27 22:10:37,818 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 22:10:37.818508
+2025-11-27 22:20:37,815 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-27 22:20:37.815061
+2025-11-27 22:26:07,119 [INFO] [MainThread] [root/bar_manager.py:92]: Stopping SystemEventListener...
+2025-11-27 22:26:07,119 [INFO] [MainThread] [root/bar_manager.py:92]: Stopping KomorebiEventListener...
+2025-11-27 22:26:07,144 [INFO] [Dummy-4] [root/event_listener.py:92]: Attempting to reconnect to Komorebi...
+2025-11-28 07:30:59,223 [INFO] [MainThread] [root/log.py:69]: YASB v1.8.5
+2025-11-28 07:30:59,224 [INFO] [Thread-1 (_run_server)] [cli_server/cli_server.py:212]: CLI server started v1.1.4
+2025-11-28 07:30:59,224 [INFO] [MainThread] [cli_server/cli_server.py:104]: Log pipe server started
+2025-11-28 07:30:59,662 [INFO] [MainThread] [root/service.py:48]: AudioOutputService starting...
+2025-11-28 07:31:00,487 [INFO] [MainThread] [root/service.py:39]: AudioInputService starting...
+2025-11-28 07:31:01,690 [INFO] [MainThread] [root/bar_manager.py:85]: Starting SystemEventListener...
+2025-11-28 07:31:01,690 [INFO] [MainThread] [root/bar_manager.py:85]: Starting KomorebiEventListener...
+2025-11-28 07:31:01,691 [INFO] [MainThread] [root/watcher.py:54]: Created file watcher for path C:\Users\barbo\.config\yasb
+2025-11-28 07:31:01,691 [INFO] [Dummy-6] [root/event_listener.py:51]: Created named pipe yasb-19949353-cc56-11f0-b491-50bbb5222701
+2025-11-28 07:31:01,761 [DEBUG] [MainThread] [qasync._windows._EventPoller/_windows.py:215]: Starting (proactor: <_IocpProactor overlapped#=0 result#=0>)...
+2025-11-28 07:31:01,767 [INFO] [Dummy-6] [root/event_listener.py:125]: Komorebi connected to named pipe: yasb-19949353-cc56-11f0-b491-50bbb5222701
+2025-11-28 07:31:01,768 [DEBUG] [Dummy-9] [qasync._windows._EventWorker/_windows.py:195]: Thread started
+2025-11-28 07:31:02,172 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-28 07:31:02.172390
+2025-11-28 07:41:00,722 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-28 07:41:00.722470
+2025-11-28 07:51:00,739 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-28 07:51:00.739147
+2025-11-28 08:01:00,749 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-28 08:01:00.749837
+2025-11-28 08:11:00,739 [INFO] [MainThread] [root/api.py:69]: Fetching new weather data at 2025-11-28 08:11:00.739818
