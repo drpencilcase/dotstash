@@ -1,0 +1,40 @@
+# ====================================================================
+# [opener] Section: Define the actual programs/commands to run
+# ====================================================================
+
+[opener]
+# 1. Editor definition: Uses the 'zed' command-line tool.
+# IMPORTANT: 'zed' must be in your system's PATH variable for this to work.
+edit = [
+    { run = 'zed "%*"', block = true, desc = "Zed Editor", for = "windows" },
+]
+
+# 2. Default opener definition: Uses the standard Windows 'start' command.
+# This opens non-text files (images, PDFs, videos, etc.) with their
+# default Windows application.
+open = [
+    { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
+]
+
+
+# ====================================================================
+# [open] Section: Define rules to map file types to the openers above
+# ====================================================================
+
+[open]
+rules = [
+    # 1. Use the 'edit' opener for all text and code-related files.
+    # This covers plain text, config files (toml, json, yaml), and source code.
+    { mime = "text/*", use = "edit" },
+
+    # 2. Add specific code file extensions if 'text/*' is too broad or if
+    # you want to ensure they are caught.
+    { extension = "rs", use = "edit" },
+    { extension = "go", use = "edit" },
+    { extension = "toml", use = "edit" },
+    { extension = "json", use = "edit" },
+
+    # 3. Fallback: Use the 'open' opener for everything else.
+    # This handles images, videos, archives, and PDFs.
+    { name = "*", use = "open" },
+]
