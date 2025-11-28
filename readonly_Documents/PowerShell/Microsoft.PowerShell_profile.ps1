@@ -59,6 +59,8 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
 # --- 6. Aliases ---
 Set-Alias vim nvim
 Set-Alias ll ls
+Set-Alias grep rg
+Set-Alias cat bat
 
 # --- 7. Terminal Icons Theme ---
 $ThemePath = "$HOME\.config\ps\gruvbox-light.psd1"
