@@ -1,0 +1,348 @@
+/* ================================================================================
+   YASB - UNIFIED PILL LAYOUT
+   ================================================================================ */
+
+:root {
+    --bg-primary: #ffdcc1;
+    --text-primary: #4a4a4a;
+    --text-white: #ffffff;
+
+    /* Softer, warmer overlays */
+    --overlay-light: rgba(255, 255, 255, 0.4);
+    --overlay-dark: rgba(0, 0, 0, 0.15);
+
+    /* Accents */
+    --accent-coral: #ee847f;
+    --accent-green: #9bcb79;
+    --accent-blue: #5ea3e3;
+    --accent-pink: #ef9db4;
+    --accent-yellow: #f6b647;
+    --accent-red: #dc6473;
+}
+
+* {
+    font-family: "M+1Code Nerd Font Propo";
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ================================================================================
+   BAR CONFIGURATION
+   ================================================================================ */
+.yasb-bar {
+    background-color: transparent;
+    padding: 6px 10px; /* Outer spacing of the bar */
+}
+
+/* THE CONTAINER PILLS
+   These hold the groups of widgets. We apply the shadow here.
+*/
+.container-left,
+.container-center,
+.container-right {
+    display: flex;
+    align-items: center;
+    filter: drop-shadow(0 4px 6px var(--overlay-dark));
+    margin: 0 4px; /* Spacing between the three pills */
+}
+
+/* ================================================================================
+   UNIVERSAL WIDGET RESET
+   This forces all widgets to touch each other to form the "Pill"
+   ================================================================================ */
+.widget {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.widget .widget-container {
+    background-color: var(--bg-primary);
+    min-height: 34px; /* Unified height */
+    padding: 0 10px;
+    margin: 0; /* Remove margin so they touch */
+    border-radius: 0; /* Square by default */
+    display: flex;
+    align-items: center;
+    box-shadow: inset 1px 0 0 var(--overlay-light); /* Vertical Separator Line */
+}
+
+/* ================================================================================
+   PILL END-CAPS (Rounding the corners)
+   We manually target the first and last widgets of your config groups.
+   ================================================================================ */
+
+/* --- LEFT PILL [ Home ... Kanata ] --- */
+
+/* First item: Home */
+.home-widget .widget-container {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: none; /* No separator on first item */
+    padding-left: 14px;
+}
+
+/* Last item: Kanata */
+.kanata-widget .widget-container {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-right: 14px;
+}
+
+/* --- CENTER PILL [ Workspaces ... Active Window ] --- */
+
+/* First item: Workspaces */
+.komorebi-workspaces .widget-container {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: none;
+    padding-left: 6px; /* Less padding for buttons */
+}
+
+/* Last item: Active Window */
+.active-window-widget .widget-container {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-right: 4px;
+    min-width: 50px; /* Ensure title doesn't collapse */
+    justify-content: center;
+}
+
+/* --- RIGHT PILL [ Media ... Clock ] --- */
+
+/* First item: Media */
+.media-widget .widget-container {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+/* Last item: Clock */
+.clock-widget .widget-container {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-right: 14px;
+    overflow: hidden;
+}
+
+/* ================================================================================
+   SPECIFIC WIDGET STYLING
+   ================================================================================ */
+
+/* Icons usually need a bit of color */
+.icon {
+    font-size: 15px;
+    margin-right: 6px;
+}
+
+/* Home Icon */
+.home-widget .label span {
+    color: var(--accent-red);
+    font-size: 16px;
+}
+
+/* Server Monitor */
+.server-widget .icon {
+    color: var(--accent-red);
+}
+
+/* Media Widget Controls */
+.media-widget .btn {
+    color: var(--accent-yellow);
+    padding: 0 4px;
+}
+
+/* Komorebi Workspaces (The buttons inside the pill) */
+.komorebi-workspaces .ws-btn {
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 2px;
+    border-radius: 6px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    padding-left: 8px;
+}
+.komorebi-workspaces .ws-btn.active {
+    background-color: var(--accent-coral);
+    color: var(--text-white);
+}
+.komorebi-workspaces .ws-btn.populated {
+    background-color: var(--accent-yellow);
+    color: var(--text-white);
+}
+
+/* Right Side Icons */
+.volume-widget .icon {
+    color: var(--accent-coral);
+}
+.microphone-widget .icon {
+    color: var(--accent-green);
+}
+.bluetooth-widget .icon {
+    color: var(--accent-blue);
+}
+.weather-widget .icon {
+    color: var(--text-primary);
+}
+
+/* ================================================================================
+   MENU STYLING
+   ================================================================================ */
+
+/* Base Menu Containers */
+.home-menu,
+.server-menu,
+.weather-card,
+.audio-menu,
+microphone-menu,
+.clock-popup {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--overlay-light);
+    border-radius: 12px;
+    margin-top: 4px;
+    padding: 8px 0;
+    filter: drop-shadow(0 4px 6px var(--overlay-dark));
+}
+
+/* --- HOME MENU --- */
+.home-menu .menu-item {
+    padding: 8px 48px 8px 16px;
+    font-size: 13px;
+    font-family: "M+1Code Nerd Font Propo";
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.home-menu .menu-item:hover {
+    background-color: rgba(238, 132, 127, 0.2);
+    color: var(--accent-coral);
+}
+
+.home-menu .separator {
+    height: 1px;
+    background-color: var(--overlay-light);
+    margin: 6px 12px;
+}
+
+/* --- SERVER MENU --- */
+.server-menu {
+    padding: 0;
+}
+
+.server-menu-header {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--overlay-light);
+}
+
+.server-menu-header .refresh-time {
+    font-family: "M+1Code Nerd Font Propo";
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.server-menu-header .reload-button {
+    font-size: 16px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.server-menu-header .reload-button:hover {
+    color: var(--accent-blue);
+}
+
+.server-menu-container {
+    background-color: var(--bg-primary);
+}
+
+.server-menu-container .row {
+    font-family: "M+1Code Nerd Font Propo";
+    padding: 10px 12px;
+    border-radius: 8px;
+    min-width: 300px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+}
+
+.server-menu-container .name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: "M+1Code Nerd Font Propo";
+    margin-bottom: 2px;
+}
+
+.server-menu-container .status {
+    font-size: 20px;
+    font-family: "M+1Code Nerd Font Propo";
+    margin-right: 8px;
+}
+
+.server-menu-container .details {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-primary);
+    opacity: 0.7;
+    font-family: "M+1Code Nerd Font Propo";
+}
+
+.server-menu-container .row.online .status {
+    color: var(--accent-green);
+}
+
+.server-menu-container .row.offline .status {
+    color: var(--accent-coral);
+}
+
+.server-menu-container .row.warning .status {
+    color: var(--accent-yellow);
+}
+
+.server-menu-container .placeholder {
+    font-family: "M+1Code Nerd Font Propo";
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 40px 16px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.server-menu-overlay {
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* --- MICROPHONE MENU --- */
+.microphone-menu {
+    background-color: var(--bg-primary);
+    min-width: 300px;
+}
+/* System microphone volume */
+.microphone-menu .system-volume-container .volume-slider {
+    border: none;
+}
+/* Device list styles */
+.microphone-menu .microphone-container .device {
+    background-color: var(--bg-primary);
+    border: none;
+    padding: 6px 8px 6px 4px;
+    margin: 2px 0;
+    font-size: 12px;
+    border-radius: 4px;
+}
+.microphone-menu .microphone-container .device.selected {
+    background-color: var(--accent-pink);
+}
+.microphone-menu .microphone-container .device:hover {
+    background-color: var(--overlay-light);
+}

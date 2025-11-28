@@ -1,0 +1,466 @@
+# ================================================================================
+# YASB (Yet Another Status Bar) Configuration
+# Reorganized and optimized for clarity
+# based on https://github.com/BrenoCRSilva/windows-dev/tree/main/env/.config
+# ================================================================================
+
+# ================================================================================
+# GENERAL SETTINGS
+# ================================================================================
+watch_stylesheet: true
+watch_config: true
+debug: false
+
+# ================================================================================
+# KOMOREBI INTEGRATION
+# ================================================================================
+komorebi:
+  start_command: "komorebic start"
+  stop_command: "komorebic stop"
+  reload_command: "komorebic reload-configuration"
+
+# ================================================================================
+# BAR CONFIGURATION
+# ================================================================================
+bars:
+  status-bar:
+    enabled: true
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: false
+    blur_effect:
+      enabled: false
+      acrylic: false
+      dark_mode: false
+      round_corners: true
+      border_color: None
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 40
+    padding:
+      top: 4
+      left: 4
+      bottom: 4
+      right: 7
+    widgets:
+      left: ["home", "server_monitor", "kanata"]
+      center: ["komorebi_workspaces", "active_window"]
+      right: ["media", "volume", "microphone", "bluetooth", "weather", "clock"]
+
+# ================================================================================
+# ACTIVE WIDGETS
+# ================================================================================
+widgets:
+  # ==============================================================================
+  # LEFT BAR WIDGETS
+  # ==============================================================================
+
+  # Home Menu Widget - Quick access to folders and power menu
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<span>\uf015</span>"
+      menu_list:
+        - { title: "User Home", path: "~" }
+        - { title: "Download", path: "~\\Downloads" }
+        - { title: "Docs", path: "Z:\\" }
+        - { title: "Data", path: "Y:\\" }
+      system_menu: true
+      power_menu: true
+      blur: false
+      border_color: "None"
+      round_corners_type: "small"
+      container_padding:
+        top: 0
+        left: 12
+        bottom: 0
+        right: 12
+
+  # Server Monitor Widget - Monitor remote and local servers
+  server_monitor:
+    type: "yasb.server_monitor.ServerMonitor"
+    options:
+      label: "<span>\uf510</span>"
+      label_alt: "{online}/{offline} of {total}"
+      ssl_check: true
+      ssl_verify: false
+      ssl_warning: 10
+      timeout: 5
+      update_interval: 300
+      desktop_notifications:
+        ssl: true
+        offline: true
+      servers:
+        - "https://unraid.gatomayo.net/"
+        - "https://homeassistant.gatomayo.net"
+        - "http://192.168.50.50/"
+        - "http://192.168.50.100:8022/"
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "left"
+        direction: "down"
+      callbacks:
+        on_left: "toggle_menu"
+        on_right: "toggle_label"
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
+
+  # Kanata Layer Indicator - Shows active keyboard layer
+  kanata:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "{data}"
+      label_alt: "{data}"
+      class_name: "kanata-widget"
+      exec_options:
+        run_cmd: "powershell -ExecutionPolicy Bypass -File C:/Users/barbo/.config/yasb/kanata_layer.ps1"
+        run_interval: 200
+        return_format: "string"
+
+  # ==============================================================================
+  # CENTER BAR WIDGETS
+  # ==============================================================================
+
+  # Komorebi Workspaces - Tiling window manager workspace switcher
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      label_offline: "Komorebi Offline"
+      label_workspace_btn: "\udb81\udc3d"
+      label_workspace_active_btn: "\udb81\udc3e"
+      label_workspace_populated_btn: "\udb81\udc3e"
+      label_default_name: "{index}"
+      label_zero_index: false
+      hide_empty_workspaces: true
+      hide_if_offline: true
+      app_icons:
+        enabled_populated: true
+        enabled_active: true
+        size: 19
+        max_icons: 0
+        hide_label: true
+        hide_duplicates: true
+        hide_floating: false
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
+
+  # Active Window - Shows currently focused window
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"
+    options:
+      label: "{win[process][name]}"
+      label_alt: ""
+      label_no_window: " "
+      label_icon: true
+      label_icon_size: 20
+      max_length: 56
+      max_length_ellipsis: "..."
+      monitor_exclusive: true
+      rewrite:
+        - pattern: "^(.+?)\\.exe$"
+          replacement: "\\1"
+          case: lower
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
+
+  # ==============================================================================
+  # RIGHT BAR WIDGETS
+  # ==============================================================================
+
+  # Media Player - Now playing info and controls
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "{title} - {artist}"
+      label_alt: "{title}"
+      max_field_size:
+        label: 20
+        label_alt: 30
+      show_thumbnail: true
+      controls_only: false
+      controls_left: true
+      hide_empty: true
+      thumbnail_alpha: 80
+      thumbnail_padding: 8
+      thumbnail_corner_radius: 16
+      icons:
+        prev_track: "\ue892"
+        next_track: "\ue893"
+        play: "\ue768"
+        pause: "\ue769"
+
+  # Volume Control - System audio volume
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>"
+      label_alt: "{volume}"
+      volume_icons:
+        - "\ueee8" # Muted
+        - "\uf026" # 0-10% (low)
+        - "\uf027" # 11-30% (medium-low)
+        - "\uf027" # 31-60% (medium)
+        - "\uf028" # 61-100% (high)
+      callbacks:
+        on_left: "toggle_mute"
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+
+  # Microphone Control - Microphone input management
+  microphone:
+    type: "yasb.microphone.MicrophoneWidget"
+    options:
+      label: "<span>{icon}</span>"
+      label_alt: "<span>{icon}</span> {level}"
+      mute_text: "mute"
+      icons:
+        normal: "\uf130"
+        muted: "\uf131"
+      mic_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+        alignment: "right"
+        direction: "down"
+      callbacks:
+        on_left: "toggle_mic_menu"
+        on_middle: "toggle_label"
+        on_right: "toggle_mute"
+
+  # Bluetooth - Bluetooth device management
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+    options:
+      label: "<span>{icon}</span>"
+      label_alt: "{device_name}"
+      label_no_device: "No devices"
+      label_device_separator: ", "
+      max_length: 20
+      max_length_ellipsis: "..."
+      icons:
+        bluetooth_on: "\udb80\udcaf"
+        bluetooth_off: "\udb80\udcb2"
+        bluetooth_connected: "\udb80\udcb1"
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "exec cmd.exe /c start ms-settings:bluetooth"
+
+  # Weather - Current weather conditions
+  weather:
+    type: "yasb.weather.WeatherWidget"
+    options:
+      label: "<span>{icon}</span> {temp}"
+      label_alt: "{location}: {conditions}, Min {min_temp}, Max {max_temp}, Humidity {humidity}"
+      api_key: "742b76e8f8a64f0c93503024252711"
+      update_interval: 600
+      hide_decimal: true
+      location: "Framingham,Massachusetts, US"
+      units: "metric"
+      callbacks:
+        on_left: "toggle_card"
+      icons:
+        sunnyDay: "󰖙 "
+        clearNight: "󰖔 "
+        cloudyDay: "󰖕 "
+        cloudyNight: "󰼱 "
+        rainyDay: "󰖖 "
+        rainyNight: "󰖖 "
+        default: "\udb81\udd99"
+      weather_card:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#45475a"
+        alignment: "right"
+        direction: "down"
+        distance: 6
+        icon_size: 48
+
+  # Clock - Date and time display
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "{%a %d • %H:%M}"
+      label_alt: "{%A %d %B %Y, %H:%M}"
+      timezones: []
+
+  # ================================================================================
+  # UNUSED WIDGETS
+  # Kept for reference - can be enabled by adding to bar widgets list
+  # ================================================================================
+
+  # CPU Monitor - CPU usage display
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span> {info[percent][total]}%"
+      label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
+      update_interval: 2000
+      histogram_icons:
+        - '\u2581' # 0%
+        - '\u2581' # 10%
+        - '\u2582' # 20%
+        - '\u2583' # 30%
+        - '\u2584' # 40%
+        - '\u2585' # 50%
+        - '\u2586' # 60%
+        - '\u2587' # 70%
+        - '\u2588' # 80%+
+      histogram_num_columns: 8
+      callbacks:
+        on_right: "exec cmd /c Taskmgr"
+
+  # Memory Monitor - RAM usage display
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span> {virtual_mem_percent}%"
+      label_alt: "<span>\uefc5</span> {virtual_mem_free}"
+      update_interval: 10000
+      callbacks:
+        on_right: "exec cmd /c Taskmgr"
+
+  # WiFi Monitor - Network connectivity info
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "<span>{wifi_icon}</span>"
+      label_alt: "{wifi_name} {wifi_strength}%"
+      update_interval: 5000
+      callbacks:
+        on_left: "exec cmd.exe /c start ms-settings:network"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "<span>{wifi_icon}</span>{ip_addr}"
+      ethernet_icon: "\ueba9"
+      wifi_icons:
+        - "\udb82\udd2e" # 0%
+        - "\udb82\udd1f" # 1-24%
+        - "\udb82\udd22" # 25-49%
+        - "\udb82\udd25" # 50-74%
+        - "\udb82\udd28" # 75-100%
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
+
+  # Network Speed - Upload/download speed monitor
+  netspeed:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "{data[speed]}"
+      label_alt: "{data[ping]}"
+      class_name: "netspeed-widget"
+      exec_options:
+        run_cmd: "powershell $env:USERPROFILE/.config/yasb/netspeed.ps1"
+        run_interval: 720000
+        return_format: "json"
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "do_nothing"
+
+  # Disk Usage - Storage space monitor
+  disk:
+    type: "yasb.disk.DiskWidget"
+    options:
+      label: "<span>\uf473</span>"
+      label_alt: "<span>\uf473</span>"
+      group_label:
+        volume_labels: ["C", "D", "E", "F"]
+        show_label_name: true
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        distance: 6
+      callbacks:
+        on_left: "toggle_group"
+
+  # Wallpaper Switcher - Change desktop wallpaper
+  wallpapers:
+    type: "yasb.wallpapers.WallpapersWidget"
+    options:
+      label: "<span>\udb83\ude09</span>"
+      image_path: "$env:USERPROFILE/.config/wallpapers"
+      change_automatically: false
+      update_interval: 60
+      gallery:
+        enabled: true
+        blur: true
+        image_width: 220
+        image_per_page: 8
+        show_buttons: false
+        orientation: "portrait"
+        image_spacing: 8
+        lazy_load: true
+        lazy_load_delay: 80
+        lazy_load_fadein: 400
+        image_corner_radius: 20
+        enable_cache: true
+      run_after:
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
+
+  # Power Menu - Standalone power options (replaced by home widget)
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "⏻"
+      uptime: true
+      blur: false
+      blur_background: true
+      animation_duration: 300
+      button_row: 3
+      buttons:
+        lock: ["\uea75", "Lock"]
+        signout: ["\udb80\udf43", "Sign out"]
+        shutdown: ["⏻", "Shut Down"]
+        restart: ["\uead2", "Restart"]
+        hibernate: ["\uf28e", "Hibernate"]
+        cancel: ["\udb81\udf3a", "Cancel"]
+
+  # Komokana Status - Application-aware layer switcher status
+  komokana:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "<span>\uf11c</span>{data}"
+      label_alt: "{data}"
+      class_name: "komokana-widget"
+      exec_options:
+        run_cmd: "powershell if (Get-Process -Name 'komokana' -ErrorAction SilentlyContinue) {'komokana'} else {'offline'}"
+        run_interval: 5000
+        return_format: "string"

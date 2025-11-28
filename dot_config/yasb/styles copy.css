@@ -1,0 +1,757 @@
+/* ================================================================================
+   YASB (Yet Another Status Bar) - Rose Pine Theme (Reorganized)
+   A comprehensive CSS theme with consistent spacing and improved organization
+   ================================================================================ */
+
+/* ================================================================================
+   GLOBAL STYLES AND VARIABLES
+   Base styling applied to all elements
+   ================================================================================ */
+* {
+    font-size: 13px;
+    color: #e0def4;
+    font-weight: 500;
+    font-family: "JetBrainsMono Nerd Font Propo";
+    padding: 0;
+}
+
+/* ================================================================================
+   SPACING CONSTANTS (Applied consistently throughout)
+   Standard spacing values used across all widgets
+   ================================================================================ */
+/*
+   SPACING PATTERN:
+   - Small spacing: 4px
+   - Medium spacing: 8px
+   - Large spacing: 12px
+   - Widget padding: 8px horizontal, 4px vertical
+   - Icon margin: 4px right
+   - Border radius: 9px for groups, 7px for inner elements
+*/
+
+/* ================================================================================
+   BAR AND CONTAINER LAYOUT
+   Main bar structure and container positioning
+   ================================================================================ */
+.yasb-bar {
+    padding: 0;
+    margin: 0;
+}
+
+.container-left {
+    margin: 0;
+    padding-left: 2px;
+}
+
+.container-center {
+    margin: 0;
+    padding: 0;
+}
+.container-right {
+    margin: 0;
+    padding-right: 1px;
+}
+
+/* ================================================================================
+   BASE WIDGET STYLES
+   Common styling for all widgets and labels
+   ================================================================================ */
+.widget {
+    background-color: #191724;
+    padding: 4px 8px;
+    margin: 0;
+    overflow: visible;
+}
+
+.widget .label {
+    padding: 2px 4px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    overflow: visible;
+}
+
+.widget .label.alt {
+    padding: 2px 8px;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    overflow: visible;
+}
+
+/* ================================================================================
+   GLOBAL ICON STYLES
+   Common icon styling and sizing - Consistent size for all except special cases
+   ================================================================================ */
+.icon {
+    font-size: 21px; /* Standard size for all icons */
+    margin-right: 4px;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 1;
+    min-width: 18px;
+    text-align: left;
+    font-feature-settings:
+        "liga" 1,
+        "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================================================================================
+   WIDGET GROUPS - LEFT CONTAINER
+   Consistent styling for widget groups
+   ================================================================================ */
+
+/* Power Menu Widget - First in left group */
+.power-menu-widget {
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    position: relative;
+}
+
+.power-menu-widget .label {
+    color: #eb6f92;
+    font-size: 21px; /* Special size for power button */
+    position: relative;
+    padding-top: 0px; /* Move font slightly downwards */
+    padding-right: 0px; /* Add padding to separate from icon */
+}
+
+/* Kanata Widget - Last in left group */
+.kanata-widget {
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+.kanata-widget .label {
+    color: #c4a7e7;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 2px 8px;
+    word-spacing: 8px; /* Adds space between icon and text */
+}
+
+.kanata-widget .icon {
+    color: #31748f;
+    font-size: 26px; /* Increased icon size */
+    padding-bottom: 2px;
+}
+
+/* ================================================================================
+   WORKSPACE AND WINDOW WIDGETS
+   ================================================================================ */
+
+/* Komorebi Workspaces */
+.komorebi-workspaces {
+    padding: 0;
+    background-color: transparent;
+}
+
+.komorebi-workspaces .widget-container {
+    background-color: #26233a;
+    margin: 0;
+    padding: 4px 8px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+/* Empty workspace - not populated, not active */
+.komorebi-workspaces .ws-btn {
+    font-size: 18px;
+    background-color: rgba(149, 160, 173, 0.15);
+    margin: 0 2px;
+    padding: 4px 6px;
+    color: #95a0ad;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow: visible;
+    min-height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Populated workspace - has windows but not currently active */
+.komorebi-workspaces .ws-btn.populated {
+    background-color: rgba(246, 193, 119, 0.25);
+    color: #f6c177;
+}
+
+/* Active workspace - currently focused */
+.komorebi-workspaces .ws-btn.active {
+    background-color: rgba(235, 111, 146, 0.35);
+    color: #eb6f92;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(235, 111, 146, 0.4);
+}
+
+/* Hover states */
+.komorebi-workspaces .ws-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.komorebi-workspaces .ws-btn.populated:hover {
+    background-color: rgba(246, 193, 119, 0.35);
+}
+
+.komorebi-workspaces .ws-btn.active:hover {
+    background-color: rgba(235, 111, 146, 0.45);
+}
+
+/* App icons styling */
+.komorebi-workspaces .ws-btn .icon {
+    margin: 0 1px;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.komorebi-workspaces .ws-btn .label {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.komorebi-workspaces .float-override {
+    color: #0eb986;
+    font-size: 14px;
+    padding-left: 8px;
+}
+
+/* Active Window Widget */
+.active-window-widget {
+    font-size: 14px;
+    padding: 0;
+    background-color: transparent;
+}
+
+.active-window-widget .widget-container {
+    background-color: #26233a;
+    margin: 0;
+    padding: 4px 12px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    box-shadow: inset 1px 0 0 rgba(224, 222, 244, 0.2);
+}
+
+.active-window-widget .label {
+    color: "#3e8fb0";
+    font-size: 20px;
+    padding: 0;
+}
+
+/* Home Widget */
+.home-widget {
+    padding: 0;
+    background-color: transparent;
+}
+
+.home-widget .widget-container {
+    background-color: #26233a;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 4px 8px;
+}
+
+.home-widget .icon {
+    color: #e0def4;
+    font-size: 16px;
+}
+
+.home-widget .icon:hover {
+    color: #eb6f92;
+}
+
+/* Home Menu */
+.home-menu {
+    background-color: #26233a;
+    border-radius: 8px;
+    padding: 8px 0;
+}
+
+.home-menu .menu-item {
+    padding: 6px 48px 7px 16px;
+    font-size: 12px;
+    font-family: "JetBrainsMono Nerd Font Propo";
+    color: #e0def4;
+    font-weight: 600;
+}
+
+.home-menu .menu-item:hover {
+    background-color: rgba(235, 111, 146, 0.15);
+    color: #eb6f92;
+}
+
+.home-menu .separator {
+    max-height: 1px;
+    background-color: rgba(149, 160, 173, 0.3);
+    margin: 4px 8px;
+}
+
+/* Server Monitor Widget */
+.server-widget {
+    padding: 0;
+    background-color: transparent;
+}
+
+.server-widget .widget-container {
+    background-color: #26233a;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 4px 8px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.server-widget .label {
+    color: #e0def4;
+}
+
+.server-widget .icon {
+    font-size: 14px;
+    color: #e0def4;
+}
+
+.server-widget .icon:hover {
+    color: #9ccfd8;
+}
+
+.server-widget .warning .icon {
+    color: #f6c177;
+}
+
+.server-widget .error .icon {
+    color: #eb6f92;
+}
+
+/* Server Monitor Menu */
+.server-menu {
+    background-color: rgba(38, 35, 58, 0.4);
+    border-radius: 8px;
+}
+
+.server-menu-header {
+    border-bottom: 1px solid rgba(224, 222, 244, 0.1);
+}
+
+.server-menu-header .refresh-time {
+    padding-left: 18px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-family: "JetBrainsMono Nerd Font Propo";
+    color: #e0def4;
+    font-size: 12px;
+}
+
+.server-menu-header .reload-button {
+    font-size: 16px;
+    padding-right: 18px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    color: #e0def4;
+}
+
+.server-menu-header .reload-button:hover {
+    color: #9ccfd8;
+}
+
+.server-menu-container {
+    background-color: rgba(38, 35, 58, 0.74);
+}
+
+.server-menu-container .row {
+    font-family: "JetBrainsMono Nerd Font Propo";
+    max-height: 40px;
+    padding: 8px;
+    border-radius: 6px;
+    min-width: 300px;
+    border: 1px solid rgba(149, 160, 173, 0);
+}
+
+.server-menu-container .row:hover {
+    background-color: rgba(224, 222, 244, 0.05);
+    border: 1px solid rgba(224, 222, 244, 0.1);
+}
+
+.server-menu-container .name {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 10px 2px 10px;
+    color: #e0def4;
+    font-family: "JetBrainsMono Nerd Font Propo";
+}
+
+.server-menu-container .status {
+    font-size: 24px;
+    padding-right: 10px;
+    font-family: "JetBrainsMono Nerd Font Propo";
+}
+
+.server-menu-container .details {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px 6px 10px;
+    color: #908caa;
+    font-family: "JetBrainsMono Nerd Font Propo";
+}
+
+.server-menu-container .row.online .status {
+    color: #9ccfd8;
+}
+
+.server-menu-container .row.offline .status {
+    color: #eb6f92;
+}
+
+.server-menu-container .row.warning .status {
+    color: #f6c177;
+}
+
+.server-menu-container .placeholder {
+    font-family: "JetBrainsMono Nerd Font Propo";
+    font-size: 16px;
+    font-weight: 600;
+    color: #e0def4;
+    padding: 50px 8px;
+    min-width: 300px;
+    background-color: transparent;
+}
+
+.server-menu-overlay {
+    background-color: rgba(38, 35, 58, 0.85);
+}
+
+.server-menu-overlay .text {
+    padding: 8px;
+    font-family: "JetBrainsMono Nerd Font Propo";
+    font-size: 16px;
+    font-weight: 600;
+    color: #e0def4;
+}
+
+/* Komorebi Active Layout */
+.komorebi-active-layout {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    padding: 4px 8px;
+}
+
+.komorebi-active-layout .widget-container {
+    background-color: #26233a;
+    margin: 4px 0;
+    border-radius: 12px;
+}
+
+.komorebi-active-layout .label {
+    font-weight: 600;
+    padding: 0;
+}
+
+/* ================================================================================
+   SYSTEM INFORMATION WIDGETS
+   ================================================================================ */
+
+/* CPU Widget */
+.cpu-widget .icon {
+    font-size: 20px;
+    color: #c4a7e7;
+    padding-bottom: 2px;
+    padding-left: 2px; /* Add padding to separate from label */
+}
+
+.cpu-widget {
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    margin-left: 8px; /* Add margin to separate from next widget */
+}
+
+/* Memory Widget */
+.memory-widget .icon {
+    color: #ebbcba;
+    padding-bottom: 2px;
+}
+
+/* Disk Widget */
+.disk-widget .icon {
+    font-size: 21px; /* Special size for disk */
+    color: #9ccfd8;
+    margin-right: 8px; /* Larger margin for this specific icon */
+}
+
+.disk-group {
+    background-color: #191724;
+}
+
+/* Wallpapers Widget */
+.wallpapers-widget .icon {
+    font-size: 22px; /* Special size for wallpaper */
+    padding-bottom: 1px;
+}
+
+.wallpapers-widget {
+    padding-left: 0px; /* Align text closer to icon */
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+/* ================================================================================
+   NETWORK WIDGETS - Tight spacing like icon+label in single widget
+   WiFi and NetSpeed with minimal gap between them
+   ================================================================================ */
+
+/* WiFi Widget - Acts as "icon" part */
+.wifi-widget {
+    padding-right: 0px; /* Minimal right padding */
+}
+
+.wifi-widget .icon {
+    padding-top: 1px; /* Slightly adjust icon position */
+    color: #f6c177;
+}
+
+/* Network Speed Widget - Acts as "label" part */
+.netspeed-widget {
+    padding-left: 0px; /* Minimal left padding to match icon-label spacing */
+}
+
+/* ================================================================================
+   AUDIO AND MEDIA WIDGETS
+   ================================================================================ */
+
+/* Volume Widget */
+
+/* Volume Widget */
+.volume-widget {
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    min-width: 70px; /* Minimum width to prevent bar shifting */
+    max-width: 70px; /* Maximum width to contain content */
+    overflow: hidden; /* Hide any overflow */
+    display: flex; /* Use flexbox for positioning */
+    align-items: center; /* Center vertically */
+}
+
+.volume-widget .icon {
+    color: #908caa;
+    margin-right: 0; /* Remove default margin */
+}
+
+.volume-widget .label {
+    margin-left: 0px; /* Make room for fixed icon */
+    text-align: left; /* Align text to left within remaining space */
+}
+
+/* Media Widget */
+.media-widget {
+    margin-right: 8px;
+    border-radius: 9px;
+}
+
+.media-widget .label {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.media-widget .btn {
+    color: #acb2c9;
+    padding: 0 4px;
+    margin: 4px 0;
+    font-family: Segoe Fluent Icons;
+}
+
+.media-widget .btn:hover {
+    color: #89b4fa;
+}
+
+.media-widget .btn.play {
+    background-color: #313244;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+.media-widget .btn.disabled:hover,
+.media-widget .btn.disabled {
+    color: #4e525c;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* ================================================================================
+   WEATHER AND TIME WIDGETS
+   ================================================================================ */
+
+/* Weather Widget */
+.weather-widget {
+    overflow: visible;
+}
+
+.weather-widget .widget-container {
+    overflow: visible;
+}
+
+.weather-widget .label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: visible;
+}
+
+.weather-widget .icon {
+    font-size: 16px;
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+/* Weather icon variations */
+.weather-widget .icon.sunnyDay {
+    color: #f6c177;
+}
+
+.weather-widget .icon.clearNight {
+    color: #524f67;
+}
+
+.weather-widget .icon.cloudyDay {
+    color: #f6c177;
+}
+
+.weather-widget .icon.cloudyNight {
+    color: #6e6a86;
+}
+
+.weather-widget .icon.rainyDay {
+    color: #9ccfd8;
+}
+
+.weather-widget .icon.rainyNight {
+    color: #31748f;
+}
+
+.weather-card {
+    background-color: #191724;
+}
+
+/* Clock Widget */
+.clock-widget {
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+/* ================================================================================
+   POWER MENU POPUP
+   Modal dialog styling
+   ================================================================================ */
+.power-menu-popup {
+    background-color: rgba(25, 23, 36, 0.9);
+    border-radius: 12px;
+    border: 4px solid rgb(38, 35, 58);
+}
+
+.power-menu-popup .button {
+    padding: 0;
+    width: 240px;
+    height: 120px;
+    border-radius: 8px;
+    background-color: rgb(38, 35, 58);
+    font-family: "Segoe UI";
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 8px;
+}
+
+.power-menu-popup .button.hover {
+    background-color: rgb(82, 79, 103);
+    border: 1px solid rgb(82, 79, 103);
+}
+
+.power-menu-popup .button .label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: "Segoe UI";
+}
+
+.power-menu-popup .button .icon {
+    font-size: 48px;
+    padding-top: 8px;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.power-menu-popup .button.cancel .icon {
+    color: rgba(235, 111, 146, 0.55);
+}
+
+.power-menu-popup .button.cancel .label {
+    color: rgba(235, 111, 146, 0.95);
+}
+
+.power-menu-popup .button.shutdown .icon {
+    color: rgba(49, 116, 143, 0.55);
+}
+
+.power-menu-popup .button.shutdown .label {
+    color: rgba(49, 116, 143, 0.95);
+}
+
+.uptime {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    font-family: "Segoe UI";
+}
+
+/* ================================================================================
+   WALLPAPER GALLERY POPUP
+   ================================================================================ */
+.wallpapers-gallery-window {
+    background-color: rgba(85, 42, 240, 0.01);
+    border: 0;
+    margin: 0;
+}
+
+.wallpapers-gallery-buttons {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 8px 0;
+    border-radius: 8px;
+    margin: 0 8px 8px 8px;
+    width: 600px;
+}
+
+.wallpapers-gallery-buttons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wallpapers-gallery-image {
+    border: 4px solid transparent;
+    border-radius: 10px;
+}
+
+.wallpapers-gallery-image:hover {
+    border: 4px solid rgb(66, 68, 83);
+}
+
+.wallpapers-gallery-image.focused {
+    border: 4px solid #89b4fa;
+}
