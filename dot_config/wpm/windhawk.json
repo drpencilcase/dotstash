@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/wpm/refs/heads/master/schema.unit.json",
+  "Unit": {
+    "Name": "windhawk",
+    "Description": "Multiple Mods for windows",
+    "Requires": []
+  },
+  "Resources": null,
+  "Service": {
+    "Kind": "Simple",
+    "ExecStart": {
+      "Executable": "windhawk",
+      "Arguments": ["-tray-only"]
+    },
+    "Restart": "Never"
+  }
+}

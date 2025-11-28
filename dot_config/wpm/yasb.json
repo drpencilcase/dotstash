@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/wpm/refs/heads/master/schema.unit.json",
+  "Unit": {
+    "Name": "yasb",
+    "Description": "Yet another Status Bar",
+    "Requires": ["komokana", "komorebi", "kanata"]
+  },
+  "Resources": null,
+  "Service": {
+    "Kind": "Simple",
+    "ExecStart": {
+      "Executable": "yasb",
+      "Arguments": []
+    },
+    "Restart": "Never"
+  }
+}

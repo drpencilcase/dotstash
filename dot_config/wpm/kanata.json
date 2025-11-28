@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/wpm/refs/heads/master/schema.unit.json",
+  "Unit": {
+    "Name": "kanata",
+    "Description": "Software keyboard remapper"
+  },
+  "Resources": {
+    "CONFIGURATION_FILE": "C:\\Users\\barbo\\.config\\kanata\\windows.kbd"
+  },
+  "Service": {
+    "Kind": "Simple",
+    "ExecStart": {
+      "Executable": "kanata.exe",
+      "Arguments": [
+        "-c",
+        "{{ Resources.CONFIGURATION_FILE }}",
+        "--port",
+        "4567"
+      ]
+    },
+    "Healthcheck": {
+      "Process": {
+        "DelaySec": 1
+      }
+    },
+    "Restart": "Never"
+  }
+}
