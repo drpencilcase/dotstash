@@ -41,14 +41,14 @@
   <idle_time_in_seconds>15</idle_time_in_seconds>
   <make_desktop_icon_text_transparent>true</make_desktop_icon_text_transparent>
   <minutes_between_icon_text_transparent_repaint>2</minutes_between_icon_text_transparent_repaint>
-  <wait_before_starting_switching>false</wait_before_starting_switching>
+  <wait_before_starting_switching>true</wait_before_starting_switching>
   <seconds_to_wait_before_starting_switching>60</seconds_to_wait_before_starting_switching>
   <run_on_startup>true</run_on_startup>
   <auto_start_switch_and_exit>false</auto_start_switch_and_exit>
   <switch_on_startup>false</switch_on_startup>
   <show_picture_info>false</show_picture_info>
   <picture_info_position>TopRight</picture_info_position>
-  <picture_orientation>LandscapeAndPortrait</picture_orientation>
+  <picture_orientation>LandscapeOnly</picture_orientation>
   <post_process_effect>None</post_process_effect>
   <download_thumbnail_concurrent_threads>4</download_thumbnail_concurrent_threads>
   <snapshot_scrapbook_background_mode>Random</snapshot_scrapbook_background_mode>
