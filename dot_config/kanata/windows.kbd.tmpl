@@ -1,4 +1,5 @@
 ;; Kanata Config: Windows + Mac Muscle Memory + Smart Shift
+;; config for {{.chezmoi.hostname}}
 
 (defcfg
   process-unmapped-keys yes
@@ -64,21 +65,22 @@
 (deflayermap (main)
     caps @wdmgmt
     IntlBackslash `
-;; WINDOWS KEYBOARD
-;;  lsft @smart_sft
-;;  lalt @smart_thumb
-;;  lmet lalt
-;;  lctl lmet
-;;  spc @spc_layer
-;;  ralt @smart_thumb_r
-;;  rmet ralt
-
-  ;; WINDOWS KEYBOARD
+    spc @spc_layer
     lsft @smart_sft
+
+{{- if eq .chezmoi.hostname "drp-surf-w11"}}
+lalt @smart_thumb
+lmet lalt
+lctl lmet
+ralt @smart_thumb_r
+▤   ralt
+{{- end}}
+
+{{- if eq .chezmoi.hostname "drp-desk-w11"}}
     lmet @smart_thumb
     lctl lmet
-    spc @spc_layer
     rmet @smart_thumb_r
+{{- end}}
 )
 (deflayermap (launcher)
 g @term
