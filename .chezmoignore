@@ -1,1 +1,6 @@
 setup-machine.ps1
+
+{{- if ne .chezmoi.os "windows" }}
+Documents/PowerShell
+Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+{{- end }}
