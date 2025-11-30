@@ -1,6 +1,5 @@
-setup-machine.ps1
-
 {{- if ne .chezmoi.os "windows" }}
+setup-machine.ps1
 Documents/PowerShell
 Documents/PowerShell/Microsoft.PowerShell_profile.ps1
 {{- end }}
