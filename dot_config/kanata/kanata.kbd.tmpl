@@ -1,0 +1,182 @@
+;; Kanata Config: Windows + Mac Muscle Memory + Smart Shift
+;; config for {{.chezmoi.hostname}}
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  danger-enable-cmd yes
+    )
+
+(defsrc
+  caps
+  lsft lalt lmet lctl
+  spc
+  ralt rmet
+  f5 g z o q c f d m p t
+  h j k l b w
+  0 1 2 3 4 5 6 7
+  left down up right
+  return
+  [ ] ; = -
+  i r x y
+)
+
+
+(defalias
+    ;; --- LAYERS & SPECIALS ---
+    wdmgmt (tap-hold 200 200 esc (layer-toggle window_c))
+    spc_layer (tap-hold-press 200 200 spc (layer-toggle extended))
+    os_app (one-shot 1000 (layer-toggle launcher))
+    smart_thumb (tap-hold-press 200 200 @os_app lmet)
+    smart_thumb_r (tap-hold-press 200 200 @os_app rmet)
+
+    ;; Smart Shift
+
+    ;; --- SMART SHIFT COMPONENTS ---
+    ;; 1. One Shot Shift: Stays active for 1000ms after tapping
+    oneshot_sft (one-shot 1000 lsft)
+
+    ;; 2. Caps Word: specialized caps lock that turns off after 2s or non-alpha key
+    caps_wrd    (caps-word 2000)
+
+    ;; 3. The Dance: Tap 1x = OneShot, Tap 2x = CapsWord
+    ;; IMPORTANT: Actions must be inside ( ... )
+    sft_dance   (tap-dance 500 (@oneshot_sft @caps_wrd))
+
+    ;; 4. The Hold: Tap = Dance, Hold = Normal Shift
+    smart_sft   (tap-hold 200 200 @sft_dance lsft)
+
+
+  ;; --- APP SHORTCUTS ---
+  term M-C-S-A-t
+  web  M-C-S-A-z
+  ocr  M-C-S-A-o
+  shot S-M-s
+  kill M-q
+  code M-C-S-A-c
+  mail M-C-S-A-e
+  todo M-C-S-A-t
+  file M-C-S-A-f
+  clip M-C-S-A-p
+  ai   M-C-S-A-a)
+
+
+(deflayermap (main)
+    caps @wdmgmt
+    IntlBackslash `
+    spc @spc_layer
+    lsft @smart_sft
+    lmet @smart_thumb
+    rmet @smart_thumb_r
+
+)
+
+
+(deflayermap (launcher)
+t @term
+z @web
+o @ocr
+q @kill
+c @code
+f @file
+e @mail
+p @clip
+a @ai
+;;t @todo
+)
+
+
+(deflayermap (extended)
+caps caps
+f5 lrld
+
+;;vim movement
+h left
+j down
+k up
+l right
+b C-left
+w C-right
+)
+
+(deflayermap (window_c)
+  ;; Configuration & Info
+  f5  (cmd yabai -m config layout bsp)
+  i   (cmd yabai -m query --windows)
+
+  ;; Window Operations
+  q   (cmd yabai -m window --close)
+  m   (cmd yabai -m window --minimize)
+
+  ;; Focus Navigation (cardinal directions)
+  h   (cmd yabai -m window --focus west)
+  j   (cmd yabai -m window --focus south)
+  k   (cmd yabai -m window --focus north)
+  l   (cmd bash -c "/opt/homebrew/bin/yabai -m window --focus east")
+
+  ;; Focus Cycling
+  [   (cmd yabai -m window --focus prev)
+  ]   (cmd yabai -m window --focus next)
+
+  ;; Window Promotion (warp to main position)
+  return    (cmd yabai -m window --warp first)
+
+  ;; Swap Windows (replaces stacking)
+  left   (cmd yabai -m window --swap west)
+  down    (cmd yabai -m window --swap south)
+  up    (cmd yabai -m window --swap north)
+  right    (cmd yabai -m window --swap east)
+
+  ;; Layout Modifications
+  ;    (cmd yabai -m window --toggle split)
+  .    (cmd yabai -m space --balance)
+  =    (cmd yabai -m window --resize right:20:0)
+  -    (cmd yabai -m window --resize right:-20:0)
+
+  ;; Window Properties
+  t    (cmd yabai -m window --toggle float)
+  r    (cmd yabai -m space --balance)
+  p    (cmd yabai -m config layout stack)
+
+  ;; Space Mirroring
+  x    (cmd yabai -m space --mirror x-axis)
+  y    (cmd yabai -m space --mirror y-axis)
+
+  ;; Space Focus
+  0    (cmd yabai -m space --focus 1)
+  1    (cmd yabai -m space --focus 1)
+  2    (cmd yabai -m space --focus 2)
+  3    (cmd yabai -m space --focus 3)
+  4    (cmd yabai -m space --focus 4)
+  5    (cmd yabai -m space --focus 5)
+  6    (cmd yabai -m space --focus 6)
+  7    (cmd yabai -m space --focus 7)
+
+  a    (layer-toggle window_cs)
+)
+
+(deflayermap (window_cs)
+  ;; Window Movement/Swapping
+  h    (cmd yabai -m window --warp west)
+  j    (cmd yabai -m window --warp south)
+  k    (cmd yabai -m window --warp north)
+  l    (cmd yabai -m window --warp east)
+
+  ;; Window Cycling in Stack
+  [    (cmd yabai -m window --focus prev)
+  ]    (cmd yabai -m window --focus next)
+
+  ;; Vertical Resize
+  =    (cmd yabai -m window --resize top:0:-20)
+  -    (cmd yabai -m window --resize top:0:20)
+
+  ;; Move Window to Space
+  0    (cmd yabai -m window --space 1)
+  1    (cmd yabai -m window --space 1)
+  2    (cmd yabai -m window --space 2)
+  3    (cmd yabai -m window --space 3)
+  4    (cmd yabai -m window --space 4)
+  5    (cmd yabai -m window --space 5)
+  6    (cmd yabai -m window --space 6)
+  7    (cmd yabai -m window --space 7)
+)
