@@ -1,0 +1,81 @@
+(deflayermap (window_c)
+  ;; Configuration & Info
+  f5  (cmd yabai -m config layout bsp)
+  i   (cmd yabai -m query --windows)
+
+  ;; Window Operations
+  q   (cmd yabai -m window --close)
+  m   (cmd yabai -m window --minimize)
+
+  ;; Focus Navigation (cardinal directions)
+  h   (cmd yabai -m window --focus west)
+  j   (cmd yabai -m window --focus south)
+  k   (cmd yabai -m window --focus north)
+  l   (cmd bash -c "/opt/homebrew/bin/yabai -m window --focus east")
+
+  ;; Focus Cycling
+  [   (cmd yabai -m window --focus prev)
+  ]   (cmd yabai -m window --focus next)
+
+  ;; Window Promotion (warp to main position)
+  return    (cmd yabai -m window --warp first)
+
+  ;; Swap Windows (replaces stacking)
+  left   (cmd yabai -m window --swap west)
+  down    (cmd yabai -m window --swap south)
+  up    (cmd yabai -m window --swap north)
+  right    (cmd yabai -m window --swap east)
+
+  ;; Layout Modifications
+  ;    (cmd yabai -m window --toggle split)
+  .    (cmd yabai -m space --balance)
+  =    (cmd yabai -m window --resize right:20:0)
+  -    (cmd yabai -m window --resize right:-20:0)
+
+  ;; Window Properties
+  t    (cmd yabai -m window --toggle float)
+  r    (cmd yabai -m space --balance)
+  p    (cmd yabai -m config layout stack)
+
+  ;; Space Mirroring
+  x    (cmd yabai -m space --mirror x-axis)
+  y    (cmd yabai -m space --mirror y-axis)
+
+  ;; Space Focus
+  0    (cmd yabai -m space --focus 1)
+  1    (cmd yabai -m space --focus 1)
+  2    (cmd yabai -m space --focus 2)
+  3    (cmd yabai -m space --focus 3)
+  4    (cmd yabai -m space --focus 4)
+  5    (cmd yabai -m space --focus 5)
+  6    (cmd yabai -m space --focus 6)
+  7    (cmd yabai -m space --focus 7)
+
+  a    (layer-toggle window_cs)
+)
+
+(deflayermap (window_cs)
+  ;; Window Movement/Swapping
+  h    (cmd yabai -m window --warp west)
+  j    (cmd yabai -m window --warp south)
+  k    (cmd yabai -m window --warp north)
+  l    (cmd yabai -m window --warp east)
+
+  ;; Window Cycling in Stack
+  [    (cmd yabai -m window --focus prev)
+  ]    (cmd yabai -m window --focus next)
+
+  ;; Vertical Resize
+  =    (cmd yabai -m window --resize top:0:-20)
+  -    (cmd yabai -m window --resize top:0:20)
+
+  ;; Move Window to Space
+  0    (cmd yabai -m window --space 1)
+  1    (cmd yabai -m window --space 1)
+  2    (cmd yabai -m window --space 2)
+  3    (cmd yabai -m window --space 3)
+  4    (cmd yabai -m window --space 4)
+  5    (cmd yabai -m window --space 5)
+  6    (cmd yabai -m window --space 6)
+  7    (cmd yabai -m window --space 7)
+)
