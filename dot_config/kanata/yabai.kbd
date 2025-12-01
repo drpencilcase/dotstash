@@ -1,81 +1,149 @@
-(deflayermap (window_c)
-  ;; Configuration & Info
-  f5  (cmd yabai -m config layout bsp)
-  i   (cmd yabai -m query --windows)
+;; Helper alias for yabai with sudo
+(defalias
+  yabai-cmd (cmd "sudo" "-u" "barbo" "/opt/homebrew/bin/yabai")
+)
+
+;; Configuration & Info
+(defalias
+  yconf   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m config layout bsp)
+  yinfo   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m query --windows)
 
   ;; Window Operations
-  q   (cmd yabai -m window --close)
-  m   (cmd yabai -m window --minimize)
+  yclose  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --close)
+  ymin    (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --minimize)
 
-  ;; Focus Navigation (cardinal directions)
-  h   (cmd yabai -m window --focus west)
-  j   (cmd yabai -m window --focus south)
-  k   (cmd yabai -m window --focus north)
-  l   (cmd bash -c "/opt/homebrew/bin/yabai -m window --focus east")
+  ;; Focus Navigation
+  yfwest  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus west)
+  yfsouth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus south)
+  yfnorth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus north)
+  yfeast  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus east)
+  yfprev  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus prev)
+  yfnext  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus next)
 
-  ;; Focus Cycling
-  [   (cmd yabai -m window --focus prev)
-  ]   (cmd yabai -m window --focus next)
+  ;; Window Promotion
+  ywarp   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp first)
 
-  ;; Window Promotion (warp to main position)
-  return    (cmd yabai -m window --warp first)
-
-  ;; Swap Windows (replaces stacking)
-  left   (cmd yabai -m window --swap west)
-  down    (cmd yabai -m window --swap south)
-  up    (cmd yabai -m window --swap north)
-  right    (cmd yabai -m window --swap east)
+  ;; Swap Windows
+  yswest  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap west)
+  yssouth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap south)
+  ysnorth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap north)
+  yseast  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap east)
 
   ;; Layout Modifications
-  ;    (cmd yabai -m window --toggle split)
-  .    (cmd yabai -m space --balance)
-  =    (cmd yabai -m window --resize right:20:0)
-  -    (cmd yabai -m window --resize right:-20:0)
-
-  ;; Window Properties
-  t    (cmd yabai -m window --toggle float)
-  r    (cmd yabai -m space --balance)
-  p    (cmd yabai -m config layout stack)
+  ybalance (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --balance)
+  yresize+ (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize right:20:0)
+  yresize- (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize right:-20:0)
+  ytoggle  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --toggle float)
+  ystack   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m config layout stack)
 
   ;; Space Mirroring
-  x    (cmd yabai -m space --mirror x-axis)
-  y    (cmd yabai -m space --mirror y-axis)
+  ymirrorx (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --mirror x-axis)
+  ymirrory (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --mirror y-axis)
 
   ;; Space Focus
-  0    (cmd yabai -m space --focus 1)
-  1    (cmd yabai -m space --focus 1)
-  2    (cmd yabai -m space --focus 2)
-  3    (cmd yabai -m space --focus 3)
-  4    (cmd yabai -m space --focus 4)
-  5    (cmd yabai -m space --focus 5)
-  6    (cmd yabai -m space --focus 6)
-  7    (cmd yabai -m space --focus 7)
+  yspace1  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 1)
+  yspace2  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 2)
+  yspace3  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 3)
+  yspace4  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 4)
+  yspace5  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 5)
+  yspace6  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 6)
+  yspace7  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 7)
 
-  a    (layer-toggle window_cs)
+  ;; Move Window to Space
+  ymove1   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 1)
+  ymove2   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 2)
+  ymove3   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 3)
+  ymove4   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 4)
+
+  ;; Window Warping
+  ywwest   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp west)
+  ywsouth  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp south)
+  ywnorth  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp north)
+  yweast   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp east)
+
+  ;; Vertical Resize
+  yresize-v+ (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize top:0:-20)
+  yresize-v- (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize top:0:20)
+
+
+  )
+
+(deflayermap (window_c)
+  ;; Configuration & Info
+  f5  @yconf
+  i   @yinfo
+
+  ;; Window Operations
+  q   @yclose
+  m   @ymin
+
+  ;; Focus Navigation
+  h   @yfwest
+  j   @yfsouth
+  k   @yfnorth
+  l   @yfeast
+
+  ;; Focus Cycling
+  [   @yfprev
+  ]   @yfnext
+
+  ;; Window Promotion
+  return @ywarp
+
+  ;; Swap Windows
+  left  @yswest
+  down  @yssouth
+  up    @ysnorth
+  right @yseast
+
+  ;; Layout Modifications
+  .   @ybalance
+  =   @yresize+
+  -   @yresize-
+
+  ;; Window Properties
+  t   @ytoggle
+  r   @ybalance
+  p   @ystack
+
+  ;; Space Mirroring
+  x   @ymirrorx
+  y   @ymirrory
+
+  ;; Space Focus
+  0   @yspace1
+  1   @yspace1
+  2   @yspace2
+  3   @yspace3
+  4   @yspace4
+  5   @yspace5
+  6   @yspace6
+  7   @yspace7
+
+
+  lsft   (layer-toggle window_cs)
+  rsft   (layer-toggle window_cs)
+  a   (layer-toggle window_cs)
 )
 
 (deflayermap (window_cs)
-  ;; Window Movement/Swapping
-  h    (cmd yabai -m window --warp west)
-  j    (cmd yabai -m window --warp south)
-  k    (cmd yabai -m window --warp north)
-  l    (cmd yabai -m window --warp east)
+  ;; Window Warping
+  h   @ywwest
+  j   @ywsouth
+  k   @ywnorth
+  l   @yweast
 
-  ;; Window Cycling in Stack
-  [    (cmd yabai -m window --focus prev)
-  ]    (cmd yabai -m window --focus next)
+  ;; Window Cycling
+  [   @yfprev
+  ]   @yfnext
 
   ;; Vertical Resize
-  =    (cmd yabai -m window --resize top:0:-20)
-  -    (cmd yabai -m window --resize top:0:20)
+  =   @yresize-v+
+  -   @yresize-v-
 
   ;; Move Window to Space
-  0    (cmd yabai -m window --space 1)
-  1    (cmd yabai -m window --space 1)
-  2    (cmd yabai -m window --space 2)
-  3    (cmd yabai -m window --space 3)
-  4    (cmd yabai -m window --space 4)
-  5    (cmd yabai -m window --space 5)
-  6    (cmd yabai -m window --space 6)
-  7    (cmd yabai -m window --space 7)
+  1   @ymove1
+  2   @ymove2
+  3   @ymove3
+  4   @ymove4
 )

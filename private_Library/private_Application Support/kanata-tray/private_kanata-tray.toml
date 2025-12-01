@@ -10,12 +10,19 @@ control_server_port = 8100
 tcp_port = 5829
 autorestart_on_crash = false
 
+
+
 [defaults.hooks]
 # Hooks allow running custom commands on specific events (e.g. when starting preset).
 # Documentation: https://github.com/rszyma/kanata-tray/blob/main/doc/hooks.md
 
 [defaults.layer_icons]
-
+main = 'main.png'
+extended = 'extended.png'
+launcher = 'launcher.png'
+window_c = 'window_c.png'
+window_cs = 'window_cs.png'
+'*' = 'default.png'
 
 [presets.'Default Preset']
 kanata_executable = '/Users/barbo/.cargo/bin/kanata'
