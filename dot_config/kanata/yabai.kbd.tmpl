@@ -1,149 +1,144 @@
-;; Helper alias for yabai with sudo
-(defalias
-  yabai-cmd (cmd "sudo" "-u" "barbo" "/opt/homebrew/bin/yabai")
-)
 
-;; Configuration & Info
-(defalias
-  yconf   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m config layout bsp)
-  yinfo   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m query --windows)
-
-  ;; Window Operations
-  yclose  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --close)
-  ymin    (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --minimize)
-
-  ;; Focus Navigation
-  yfwest  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus west)
-  yfsouth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus south)
-  yfnorth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus north)
-  yfeast  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus east)
-  yfprev  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus prev)
-  yfnext  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --focus next)
-
-  ;; Window Promotion
-  ywarp   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp first)
-
-  ;; Swap Windows
-  yswest  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap west)
-  yssouth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap south)
-  ysnorth (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap north)
-  yseast  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --swap east)
-
-  ;; Layout Modifications
-  ybalance (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --balance)
-  yresize+ (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize right:20:0)
-  yresize- (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize right:-20:0)
-  ytoggle  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --toggle float)
-  ystack   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m config layout stack)
-
-  ;; Space Mirroring
-  ymirrorx (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --mirror x-axis)
-  ymirrory (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --mirror y-axis)
-
-  ;; Space Focus
-  yspace1  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 1)
-  yspace2  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 2)
-  yspace3  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 3)
-  yspace4  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 4)
-  yspace5  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 5)
-  yspace6  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 6)
-  yspace7  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m space --focus 7)
-
-  ;; Move Window to Space
-  ymove1   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 1)
-  ymove2   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 2)
-  ymove3   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 3)
-  ymove4   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --space 4)
-
-  ;; Window Warping
-  ywwest   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp west)
-  ywsouth  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp south)
-  ywnorth  (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp north)
-  yweast   (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --warp east)
-
-  ;; Vertical Resize
-  yresize-v+ (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize top:0:-20)
-  yresize-v- (cmd sudo -u barbo /opt/homebrew/bin/yabai -m window --resize top:0:20)
-
-
-  )
+{{- $yabai := printf "cmd sudo -u %s /opt/homebrew/bin/yabai -m" .chezmoi.username -}}
 
 (deflayermap (window_c)
-  ;; Configuration & Info
-  f5  @yconf
-  i   @yinfo
+  ;; --- System ---
+  f5      ({{ $yabai }} --restart-service)
 
-  ;; Window Operations
-  q   @yclose
-  m   @ymin
+  ;; --- Window Management ---
+  q       ({{ $yabai }} window --close)
+  m       ({{ $yabai }} window --minimize)
+  return  ({{ $yabai }} window --warp first)
+  tab     ({{ $yabai }} window --focus recent)
 
-  ;; Focus Navigation
-  h   @yfwest
-  j   @yfsouth
-  k   @yfnorth
-  l   @yfeast
+  ;; --- Window States (Toggle) ---
+  t       ({{ $yabai }} window --toggle float)
+  .       ({{ $yabai }} window --toggle zoom-fullscreen)
+  ,       ({{ $yabai }} window --toggle zoom-parent)
+  /       ({{ $yabai }} window --toggle split)
+  p       ({{ $yabai }} window --toggle pip)
+  s       ({{ $yabai }} window --toggle sticky)
 
-  ;; Focus Cycling
-  [   @yfprev
-  ]   @yfnext
+  ;; --- Focus (Vim style) ---
+  h       ({{ $yabai }} window --focus west)
+  j       ({{ $yabai }} window --focus south)
+  k       ({{ $yabai }} window --focus north)
+  l       ({{ $yabai }} window --focus east)
 
-  ;; Window Promotion
-  return @ywarp
+  ;; --- Focus Cycle ---
+  [       ({{ $yabai }} window --focus prev)
+  ]       ({{ $yabai }} window --focus next)
 
-  ;; Swap Windows
-  left  @yswest
-  down  @yssouth
-  up    @ysnorth
-  right @yseast
+  ;; --- Stack Navigation ---
+  u       ({{ $yabai }} window --focus stack.prev)
+  i       ({{ $yabai }} window --focus stack.next)
 
-  ;; Layout Modifications
-  .   @ybalance
-  =   @yresize+
-  -   @yresize-
+  ;; --- Warp (Arrow keys) ---
+  left    ({{ $yabai }} window --warp west)
+  down    ({{ $yabai }} window --warp south)
+  up      ({{ $yabai }} window --warp north)
+  right   ({{ $yabai }} window --warp east)
 
-  ;; Window Properties
-  t   @ytoggle
-  r   @ybalance
-  p   @ystack
+  ;; --- Resize Horizontal ---
+  -       ({{ $yabai }} window --resize left:-50:0)
+  =       ({{ $yabai }} window --resize right:50:0)
 
-  ;; Space Mirroring
-  x   @ymirrorx
-  y   @ymirrory
+  ;; --- Layout Controls ---
+  r       ({{ $yabai }} space --balance)
+  e       ({{ $yabai }} space --rotate 90)
+  w       ({{ $yabai }} space --rotate 270)
+  x       ({{ $yabai }} space --mirror x-axis)
+  y       ({{ $yabai }} space --mirror y-axis)
 
-  ;; Space Focus
-  0   @yspace1
-  1   @yspace1
-  2   @yspace2
-  3   @yspace3
-  4   @yspace4
-  5   @yspace5
-  6   @yspace6
-  7   @yspace7
+  ;; --- Layout Mode Switching ---
+  b       ({{ $yabai }} space --layout bsp)
+  v       ({{ $yabai }} space --layout stack)
+  c       ({{ $yabai }} space --layout float)
 
+  ;; --- Space Navigation ---
+  n       ({{ $yabai }} space --focus prev)
+  o       ({{ $yabai }} space --focus next)
+  grave   ({{ $yabai }} space --focus recent)
 
-  lsft   (layer-toggle window_cs)
-  rsft   (layer-toggle window_cs)
-  a   (layer-toggle window_cs)
+  ;; --- Space Focus (Numbers) ---
+  1       ({{ $yabai }} space --focus 1)
+  2       ({{ $yabai }} space --focus 2)
+  3       ({{ $yabai }} space --focus 3)
+  4       ({{ $yabai }} space --focus 4)
+  5       ({{ $yabai }} space --focus 5)
+  6       ({{ $yabai }} space --focus 6)
+  7       ({{ $yabai }} space --focus 7)
+  8       ({{ $yabai }} space --focus 8)
+  9       ({{ $yabai }} space --focus 9)
+
+  ;; --- NUMPAD: Display Focus ---
+  kp1     ({{ $yabai }} display --focus 1)
+  kp2     ({{ $yabai }} display --focus 2)
+  kp3     ({{ $yabai }} display --focus 3)
+  kp4     ({{ $yabai }} display --focus west)
+  kp5     ({{ $yabai }} display --focus recent)
+  kp6     ({{ $yabai }} display --focus east)
+  kp8     ({{ $yabai }} display --focus north)
+  kp2     ({{ $yabai }} display --focus south)
+  kpplus  ({{ $yabai }} display --focus next)
+  kpminus ({{ $yabai }} display --focus prev)
+
+  ;; --- Sublayer Toggle (Hold 'a' for advanced/move operations) ---
+  a       (layer-while-held window_cs)
 )
 
 (deflayermap (window_cs)
-  ;; Window Warping
-  h   @ywwest
-  j   @ywsouth
-  k   @ywnorth
-  l   @yweast
+  ;; --- Swap Windows (Vim keys) ---
+  h       ({{ $yabai }} window --swap west)
+  j       ({{ $yabai }} window --swap south)
+  k       ({{ $yabai }} window --swap north)
+  l       ({{ $yabai }} window --swap east)
 
-  ;; Window Cycling
-  [   @yfprev
-  ]   @yfnext
+  ;; --- Swap Cycle ---
+  [       ({{ $yabai }} window --swap prev)
+  ]       ({{ $yabai }} window --swap next)
 
-  ;; Vertical Resize
-  =   @yresize-v+
-  -   @yresize-v-
+  ;; --- Resize Vertical ---
+  -       ({{ $yabai }} window --resize top:0:-50)
+  =       ({{ $yabai }} window --resize bottom:0:50)
 
-  ;; Move Window to Space
-  1   @ymove1
-  2   @ymove2
-  3   @ymove3
-  4   @ymove4
+  ;; --- Resize All Sides (Arrow keys for fine control) ---
+  left    ({{ $yabai }} window --resize left:-20:0)
+  right   ({{ $yabai }} window --resize right:20:0)
+  up      ({{ $yabai }} window --resize top:0:-20)
+  down    ({{ $yabai }} window --resize bottom:0:20)
+
+  ;; --- Send Window to Space ---
+  1       ({{ $yabai }} window --space 1)
+  2       ({{ $yabai }} window --space 2)
+  3       ({{ $yabai }} window --space 3)
+  4       ({{ $yabai }} window --space 4)
+  5       ({{ $yabai }} window --space 5)
+  6       ({{ $yabai }} window --space 6)
+  7       ({{ $yabai }} window --space 7)
+  8       ({{ $yabai }} window --space 8)
+  9       ({{ $yabai }} window --space 9)
+
+  ;; --- Send Window to Space and Follow ---
+  n       (cmd "{{ $yabai }} window --space prev; {{ $yabai }} space --focus prev")
+  o       (cmd "{{ $yabai }} window --space next; {{ $yabai }} space --focus next")
+
+  ;; --- Grid Float (Common positions) ---
+  f       ({{ $yabai }} window --toggle float --grid 4:4:1:1:2:2)  ; center
+  return  ({{ $yabai }} window --toggle float --grid 1:1:0:0:1:1)  ; fullscreen float
+
+  ;; --- NUMPAD: Send Window to Display ---
+  kp1     ({{ $yabai }} window --display 1)
+  kp2     ({{ $yabai }} window --display 2)
+  kp3     ({{ $yabai }} window --display 3)
+  kp4     ({{ $yabai }} window --display west)
+  kp6     ({{ $yabai }} window --display east)
+  kp8     ({{ $yabai }} window --display north)
+  kp2     ({{ $yabai }} window --display south)
+  kpplus  ({{ $yabai }} window --display next)
+  kpminus ({{ $yabai }} window --display prev)
+
+  ;; --- NUMPAD: Send Window to Display and Follow ---
+  kp0     (cmd "{{ $yabai }} window --display next; {{ $yabai }} display --focus next")
+  kpdot   (cmd "{{ $yabai }} window --display prev; {{ $yabai }} display --focus prev")
 )
