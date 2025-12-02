@@ -31,52 +31,78 @@ local appearance_config = {
     },
     window_background_opacity = 0.90,
     macos_window_background_blur = 5,
-    warn_about_missing_glyphs = false,
+    warn_about_missing_glyphs = true,
     font_size = 14.0,
     line_height = 1.3,
     harfbuzz_features = { "calt", "liga", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
     font = wezterm.font_with_fallback {
-        { -- Normal text
+        { -- Normal text - first option
             family = 'Monaspace Neon NF',
             harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
             stretch = 'UltraCondensed', -- This doesn't seem to do anything
         },
-        family = 'MonaspiceNe NF',
-        harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-        stretch = 'UltraCondensed', -- This doesn't seem to do anything
+        {                               -- Normal text - fallback option
+            family = 'MonaspiceNe NF',
+            harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+            stretch = 'UltraCondensed', -- This doesn't seem to do anything
+        },
     },
+
     font_rules = {
         { -- Italic
             intensity = 'Normal',
             italic = true,
-            font = wezterm.font({
-                -- family="Monaspace Radon",  -- script style
-                family = 'Monaspace Xenon NF', -- courier-like
-                style = 'Italic',
-            })
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'Monaspace Xenon NF', -- courier-like
+                    style = 'Italic',
+                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+                },
+                {
+                    family = 'MonaspiceXe NF',
+                    style = 'Italic',
+                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+                },
+            }
         },
 
         { -- Bold
             intensity = 'Bold',
             italic = false,
-            font = wezterm.font({
-                family = 'Monaspace Krypton NF',
-                -- weight='ExtraBold',
-                weight = 'Bold',
-            })
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'Monaspace Krypton NF',
+                    weight = 'Bold',
+                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+                },
+                {
+                    family = 'MonaspiceKr NF',
+                    weight = 'Bold',
+                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+                },
+            }
         },
 
         { -- Bold Italic
             intensity = 'Bold',
             italic = true,
-            font = wezterm.font({
-                family = 'Monaspace Xenon NF',
-                style = 'Italic',
-                weight = 'Bold',
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'Monaspace Xenon NF',
+                    style = 'Italic',
+                    weight = 'Bold',
+                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+                },
+                {
+                    family = 'MonaspiceXe NF',
+                    style = 'Italic',
+                    weight = 'Bold',
+                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+                },
             }
-            )
         },
     },
+
 }
 
 if is_windows() then

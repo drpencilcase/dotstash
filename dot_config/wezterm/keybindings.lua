@@ -17,7 +17,6 @@ local keys = {
     -- RELOAD CONFIG
     { key = 'r',  mods = 'LEADER', action = act.ReloadConfiguration },
 
-    -- PANES: Split
     { key = '-',  mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
     { key = '\\', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
 
