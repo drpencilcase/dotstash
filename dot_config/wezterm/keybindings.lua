@@ -6,7 +6,7 @@ local act = wezterm.action
 -- On Mac, Thumb is CMD. On Windows, your Kanata setup makes Thumb send CTRL.
 local THUMB = is_darwin() and 'CMD' or 'CTRL'
 
-
+local leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 local keys = {
     -- COMMAND PALETTE (Keep your existing binding)
     { key = 'k',  mods = THUMB,    action = act.ActivateCommandPalette },

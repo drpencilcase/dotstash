@@ -18,11 +18,15 @@ local keybindings = require("keybindings")
 local appearance = require("appearance")
 
 -- Create the main config table and merge settings from modules
-local config = {
-}
+local config = {}
+
+-- Merge appearance settings
 for k, v in pairs(appearance) do
     config[k] = v
 end
+
+-- Set leader and keys from keybindings module
+config.leader = keybindings.leader
 config.keys = keybindings.keys
 
 return config
