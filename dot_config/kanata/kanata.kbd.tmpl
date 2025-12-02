@@ -25,7 +25,7 @@
 (defalias
     ;; --- LAYERS & SPECIALS ---
     wdmgmt (tap-hold 200 200 esc (layer-toggle window_c))
-    spc_layer (tap-hold-press 200 200 spc (layer-toggle extended))
+    spc_layer (tap-hold 200 300 spc (layer-toggle extended))
     os_app (one-shot 1000 (layer-toggle launcher))
     smart_thumb (tap-hold-press 200 200 @os_app lmet)
     smart_thumb_r (tap-hold-press 200 200 @os_app rmet)

@@ -2,7 +2,6 @@
 -- Appearance settings for wezterm
 local wezterm = require 'wezterm'
 
-
 local function get_appearance()
     if wezterm.gui then
         return wezterm.gui.get_appearance()
@@ -20,7 +19,7 @@ end
 
 local appearance_config = {
     color_scheme = scheme_for_appearance(get_appearance()),
-    use_fancy_tab_bar = true,
+    use_fancy_tab_bar = false,
     hide_tab_bar_if_only_one_tab = true,
     window_decorations = 'RESIZE',
     window_frame = {
@@ -109,5 +108,4 @@ if is_windows() then
     appearance_config.window_background_opacity = 0
     appearance_config.win32_system_backdrop = 'Mica'
 end
-
 return appearance_config
