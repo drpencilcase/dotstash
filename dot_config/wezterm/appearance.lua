@@ -2,6 +2,7 @@
 -- Appearance settings for wezterm
 local wezterm = require 'wezterm'
 
+
 local function get_appearance()
     if wezterm.gui then
         return wezterm.gui.get_appearance()
@@ -30,25 +31,50 @@ local appearance_config = {
     },
     window_background_opacity = 0.90,
     macos_window_background_blur = 5,
-    font = wezterm.font("Monaspace Neon NF"),
+    warn_about_missing_glyphs = false,
     font_size = 14.0,
     line_height = 1.3,
     harfbuzz_features = { "calt", "liga", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
+    font = wezterm.font_with_fallback {
+        { -- Normal text
+            family = 'Monaspace Neon NF',
+            harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+            stretch = 'UltraCondensed', -- This doesn't seem to do anything
+        },
+        family = 'MonaspiceNe NF',
+        harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
+        stretch = 'UltraCondensed', -- This doesn't seem to do anything
+    },
     font_rules = {
-        {
-            intensity = "Normal",
+        { -- Italic
+            intensity = 'Normal',
             italic = true,
-            font = wezterm.font("Monaspace Radon NF", { weight = "Regular" }),
+            font = wezterm.font({
+                -- family="Monaspace Radon",  -- script style
+                family = 'Monaspace Xenon NF', -- courier-like
+                style = 'Italic',
+            })
         },
-        {
-            intensity = "Bold",
+
+        { -- Bold
+            intensity = 'Bold',
             italic = false,
-            font = wezterm.font("Monaspace Neon NF", { weight = "ExtraBold" }),
+            font = wezterm.font({
+                family = 'Monaspace Krypton NF',
+                -- weight='ExtraBold',
+                weight = 'Bold',
+            })
         },
-        {
-            intensity = "Bold",
+
+        { -- Bold Italic
+            intensity = 'Bold',
             italic = true,
-            font = wezterm.font("Monaspace Radon NF", { weight = "ExtraBold" }),
+            font = wezterm.font({
+                family = 'Monaspace Xenon NF',
+                style = 'Italic',
+                weight = 'Bold',
+            }
+            )
         },
     },
 }
