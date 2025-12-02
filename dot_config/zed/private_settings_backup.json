@@ -1,0 +1,131 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "indent_guides": {
+    "coloring": "indent_aware",
+    "background_coloring": "indent_aware"
+  },
+  "soft_wrap": "editor_width",
+  "tab_size": 2,
+  "toolbar": {
+    "code_actions": true
+  },
+  "relative_line_numbers": true,
+  "use_system_path_prompts": false,
+  "icon_theme": "Material Icon Theme",
+  "autosave": "on_focus_change",
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini"
+    },
+    "model_parameters": []
+  },
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Day Shift",
+    "dark": "Night Shift"
+  },
+  "format_on_save": "on",
+  "languages": {
+    "JavaScript": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "TypeScript": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "TSX": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "JSON": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "CSS": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "HTML": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "Markdown": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "YAML": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    }
+  },
+  "file_types": {
+    "Kanata": ["*.kbd", "*.kbd.tmpl"],
+    "JavaScript": ["*.js.tmpl"],
+    "TypeScript": ["*.ts.tmpl"],
+    "JSON": ["*.json.tmpl"],
+    "YAML": ["*.yaml.tmpl", "*.yml.tmpl"],
+    "Shell Script": [
+      "*.sh.tmpl",
+      "*.bash.tmpl",
+      "*.zsh.tmpl",
+      ".bashrc.tmpl",
+      ".zshrc.tmpl",
+      ".env.tmpl"
+    ],
+    "TOML": ["*.toml.tmpl"],
+    "Markdown": ["*.md.tmpl"]
+  }
+}
