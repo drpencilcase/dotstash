@@ -145,10 +145,11 @@ local keys = {
     -- ============================================================================
     -- CLIPBOARD
     -- ============================================================================
-    { key = 'c',     mods = THUMB,    action = act.CopyTo 'Clipboard' },
-    { key = 'v',     mods = THUMB,    action = act.PasteFrom 'Clipboard' },
+    --{ key = 'c',     mods = THUMB,    action = act.CopyTo 'Clipboard' },
+    --{ key = 'v',     mods = THUMB,    action = act.PasteFrom 'Clipboard' },
     { key = 'Copy',  mods = 'NONE',   action = act.CopyTo 'Clipboard' },
     { key = 'Paste', mods = 'NONE',   action = act.PasteFrom 'Clipboard' },
+
 
     -- ============================================================================
     -- MISC

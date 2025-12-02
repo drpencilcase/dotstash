@@ -17,6 +17,9 @@ end
 local keybindings = require("keybindings")
 local appearance = require("appearance")
 
+local windows = require("windows")
+
+
 -- Create the main config table and merge settings from modules
 local config = {}
 
@@ -28,5 +31,10 @@ end
 -- Set leader and keys from keybindings module
 config.leader = keybindings.leader
 config.keys = keybindings.keys
+
+-- Load windows only configs --
+if is_windows() then
+    windows.apply_to_config(config)
+end
 
 return config
