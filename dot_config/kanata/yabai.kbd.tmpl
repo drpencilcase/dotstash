@@ -10,6 +10,7 @@
   m       ({{ $yabai }} window --minimize)
   return  ({{ $yabai }} window --warp first)
   tab     ({{ $yabai }} window --focus recent)
+  \       ({{ $yabai }} window --toggle float --grid 4:4:1:1:2:2)  ;; center
 
   ;; --- Window States (Toggle) ---
   t       ({{ $yabai }} window --toggle float)
@@ -56,7 +57,7 @@
   c       ({{ $yabai }} space --layout float)
 
   ;; --- Space Navigation ---
-  n       ({{ $yabai }} space --focus prev)
+  9       ({{ $yabai }} space --focus prev)
   o       ({{ $yabai }} space --focus next)
   grave   ({{ $yabai }} space --focus recent)
 
@@ -69,7 +70,6 @@
   6       ({{ $yabai }} space --focus 6)
   7       ({{ $yabai }} space --focus 7)
   8       ({{ $yabai }} space --focus 8)
-  9       ({{ $yabai }} space --focus 9)
 
   ;; --- NUMPAD: Display Focus ---
   kp1     ({{ $yabai }} display --focus 1)
@@ -79,9 +79,8 @@
   kp5     ({{ $yabai }} display --focus recent)
   kp6     ({{ $yabai }} display --focus east)
   kp8     ({{ $yabai }} display --focus north)
-  kp2     ({{ $yabai }} display --focus south)
-  kpplus  ({{ $yabai }} display --focus next)
-  kpminus ({{ $yabai }} display --focus prev)
+;;  kp-plus  ({{ $yabai }} display --focus next)
+;;  kp-minus ({{ $yabai }} display --focus prev)
 
   ;; --- Sublayer Toggle (Hold 'a' for advanced/move operations) ---
   a       (layer-while-held window_cs)
@@ -109,23 +108,22 @@
   down    ({{ $yabai }} window --resize bottom:0:20)
 
   ;; --- Send Window to Space ---
-  1       ({{ $yabai }} window --space 1)
-  2       ({{ $yabai }} window --space 2)
-  3       ({{ $yabai }} window --space 3)
-  4       ({{ $yabai }} window --space 4)
-  5       ({{ $yabai }} window --space 5)
-  6       ({{ $yabai }} window --space 6)
-  7       ({{ $yabai }} window --space 7)
-  8       ({{ $yabai }} window --space 8)
-  9       ({{ $yabai }} window --space 9)
+  1       ({{ $yabai }} window --space 1 --focus)
+  2       ({{ $yabai }} window --space 2 --focus)
+  3       ({{ $yabai }} window --space 3 --focus)
+  4       ({{ $yabai }} window --space 4 --focus)
+  5       ({{ $yabai }} window --space 5 --focus)
+  6       ({{ $yabai }} window --space 6 --focus)
+  7       ({{ $yabai }} window --space 7 --focus)
+  8       ({{ $yabai }} window --space 8 --focus)
 
   ;; --- Send Window to Space and Follow ---
-  n       (cmd "{{ $yabai }} window --space prev; {{ $yabai }} space --focus prev")
-  o       (cmd "{{ $yabai }} window --space next; {{ $yabai }} space --focus next")
+  n       (cmd "{{ $yabai }} window --space prev --focus prev")
+  o       (cmd "{{ $yabai }} window --space next --focus next")
 
   ;; --- Grid Float (Common positions) ---
-  f       ({{ $yabai }} window --toggle float --grid 4:4:1:1:2:2)  ; center
-  return  ({{ $yabai }} window --toggle float --grid 1:1:0:0:1:1)  ; fullscreen float
+  \       ({{ $yabai }} window --toggle float --grid 4:4:1:1:2:2)  ;; center
+  return  ({{ $yabai }} window --toggle float --grid 1:1:0:0:1:1)  ;; fullscreen float
 
   ;; --- NUMPAD: Send Window to Display ---
   kp1     ({{ $yabai }} window --display 1)
@@ -134,11 +132,11 @@
   kp4     ({{ $yabai }} window --display west)
   kp6     ({{ $yabai }} window --display east)
   kp8     ({{ $yabai }} window --display north)
-  kp2     ({{ $yabai }} window --display south)
-  kpplus  ({{ $yabai }} window --display next)
-  kpminus ({{ $yabai }} window --display prev)
+  ;; kp2     ({{ $yabai }} window --display south)
+  ;; kpplus  ({{ $yabai }} window --display next)
+ ;;  kpminus ({{ $yabai }} window --display prev)
 
   ;; --- NUMPAD: Send Window to Display and Follow ---
   kp0     (cmd "{{ $yabai }} window --display next; {{ $yabai }} display --focus next")
-  kpdot   (cmd "{{ $yabai }} window --display prev; {{ $yabai }} display --focus prev")
+  ;; kpdot   (cmd "{{ $yabai }} window --display prev; {{ $yabai }} display --focus prev")
 )

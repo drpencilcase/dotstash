@@ -5,7 +5,7 @@
   process-unmapped-keys yes
   log-layer-changes no
   danger-enable-cmd yes
-    )
+   concurrent-tap-hold yes)
 
 (defsrc
   caps
@@ -60,6 +60,9 @@
   clip M-C-S-A-p
   ai   M-C-S-A-a)
 
+(defchordsv2
+  (z x) (layer-while-held emoji) 50 first-release ()
+)
 
 (deflayermap (main)
     caps @wdmgmt
@@ -68,7 +71,15 @@
     lsft @smart_sft
     lmet @smart_thumb
     rmet @smart_thumb_r
-
+  f1 🔅
+  f2 🔆
+  f3 mctl
+  f4 sls
+  f5 fn
+  f6 lrld
+  f10 🔇
+  f11 🔉
+  f12 🔊
 )
 
 
@@ -104,7 +115,19 @@ b C-left
 w C-right
 {{- end }}
 )
+( deflayermap (emoji)
+ r (unicode 🔴)
+ o (unicode 🟠)
+ g (unicode 🟢)
+ y (unicode 🟡)
+ n (unicode 🏥)
+ i (unicode 🧊)
+ h left
+ j down
+ k up
+ l right
 
+)
 {{- if eq .chezmoi.os "darwin" }}
 (include yabai.kbd)
 {{- end }}
