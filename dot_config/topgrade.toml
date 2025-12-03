@@ -16,7 +16,7 @@
 # Run `sudo -v` to cache credentials at the start of the run
 # This avoids a blocking password prompt in the middle of an unattended run
 # (default: false)
-# pre_sudo = false
+pre_sudo = false
 
 # Sudo command to be used
 # sudo_command = "sudo"
@@ -28,7 +28,7 @@
 # ignore_failures = ["powershell"]
 
 # List of remote machines with Topgrade installed on them
-# remote_topgrades = ["toothless", "pi", "parnas"]
+#remote_topgrades = ["framboesa", "jabuticaba"]
 
 # Path to Topgrade executable on remote machines
 # remote_topgrade_path = ".cargo/bin/topgrade"
