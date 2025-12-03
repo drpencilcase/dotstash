@@ -46,10 +46,10 @@ remote_topgrades = ["framboesa", "jabuticaba"]
 # display_time = true
 
 # Don't ask for confirmations (no default value)
-# assume_yes = true
+assume_yes = true
 
 # Do not ask to retry failed steps (default: false)
-# no_retry = true
+no_retry = true
 
 # Show the reason for skipped steps (default: false)
 # This has no effect if the "only" option is specified
@@ -65,7 +65,7 @@ remote_topgrades = ["framboesa", "jabuticaba"]
 # tmux_session_mode = "attach_if_not_in_session"
 
 # Cleanup temporary or old files (default: false)
-# cleanup = true
+cleanup = true
 
 # Send a notification for every step (default: false)
 # notify_each_step = false
@@ -275,7 +275,7 @@ remote_topgrades = ["framboesa", "jabuticaba"]
 # Causes Topgrade to rename itself during the run to allow package managers
 # to upgrade it. Use this only if you installed Topgrade by using a package
 # manager such as Scoop or Cargo
-# self_rename = true
+self_rename = true
 
 # Use sudo to elevate privileges for the Windows Package Manager (winget)
 # Only use this option if you want to run the Winget step in sudo-mode.
