@@ -8,17 +8,7 @@
    concurrent-tap-hold yes)
 
 (defsrc
-  caps
-  lsft lalt lmet lctl
-  spc
-  ralt rmet
-  f5 g z o q c f d m p t
-  h j k l b w
-  0 1 2 3 4 5 6 7
-  left down up right
-  return
-  [ ] ; = -
-  i r x y
+
 )
 
 
@@ -54,14 +44,15 @@
   code M-C-S-A-c
   mail M-C-S-A-e
   todo M-C-S-A-t
-  file M-C-S-A-f
-  ai   M-C-S-A-a)
+  flmg M-C-S-A-f
+  ai   M-C-S-A-a
 
 ;; ___ COMMANDS Shortcuts __
   ocr  M-C-S-A-o
   chezmoi_edit(cmd /bin/launchctl asuser 501 /usr/bin/sudo -u barbo /opt/homebrew/bin/chezmoi edit --watch)
   shot S-M-s
   clip M-C-S-A-p
+ )
 
 
 
@@ -95,7 +86,7 @@ z @web
 o @ocr
 q @kill
 c @code
-f @file
+f @flmg
 e @mail
 p @clip
 a @ai

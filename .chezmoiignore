@@ -3,3 +3,9 @@ setup-machine.ps1
 Documents/PowerShell
 Documents/PowerShell/Microsoft.PowerShell_profile.ps1
 {{- end }}
+
+# Ignore all lock files
+**/*.lock
+
+# Ignore all MDB database files
+**/*.mdb
