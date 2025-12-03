@@ -28,7 +28,7 @@ pre_sudo = false
 # ignore_failures = ["powershell"]
 
 # List of remote machines with Topgrade installed on them
-#remote_topgrades = ["framboesa", "jabuticaba"]
+remote_topgrades = ["framboesa", "jabuticaba"]
 
 # Path to Topgrade executable on remote machines
 # remote_topgrade_path = ".cargo/bin/topgrade"
