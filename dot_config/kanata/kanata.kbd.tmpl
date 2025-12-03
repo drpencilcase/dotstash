@@ -50,15 +50,21 @@
   ;; --- APP SHORTCUTS ---
   term M-C-S-A-t
   web  M-C-S-A-z
-  ocr  M-C-S-A-o
-  shot S-M-s
   kill M-q
   code M-C-S-A-c
   mail M-C-S-A-e
   todo M-C-S-A-t
   file M-C-S-A-f
-  clip M-C-S-A-p
   ai   M-C-S-A-a)
+
+;; ___ COMMANDS Shortcuts __
+  ocr  M-C-S-A-o
+  chezmoi_edit(cmd /bin/launchctl asuser 501 /usr/bin/sudo -u barbo /opt/homebrew/bin/chezmoi edit --watch)
+  shot S-M-s
+  clip M-C-S-A-p
+
+
+
 
 (defchordsv2
   (z x) (layer-while-held emoji) 50 first-release ()
@@ -98,6 +104,11 @@ a @ai
 
 
 (deflayermap (extended)
+IntlBackslash @chezmoi_edit
+` @chezmoi_edit
+o @ocr
+p @clip
+s @shot
 caps caps
 f5 lrld
 a C-a

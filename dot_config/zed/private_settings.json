@@ -66,7 +66,7 @@
     "light": "Day Shift",
     "dark": "Night Shift"
   },
-  "format_on_save": "on",
+  "format_on_save": "off",
   "languages": {
     "JavaScript": {
       "format_on_save": "on",
