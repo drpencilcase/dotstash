@@ -85,10 +85,18 @@
   caps @wdmgmt
   IntlBackslash `
   spc @spc_layer
+{{- if eq .chezmoi.hostname "drp-surf-w11"}}
+    lalt @smart_thumb
+    lmet lalt
+    lctl lmet
+    ralt @smart_thumb_r
+    ▤   ralt
+{{ else }}
   lsft @smart_sft
   lmet @smart_thumb
   rmet @smart_thumb_r
   lctl lmet
+{{- end}}
   f2 🔆
   f3 mctl
   f4 sls
