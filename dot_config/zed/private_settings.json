@@ -7,6 +7,19 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ssh_connections": [
+    {
+      "host": "framboesa",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/barbo"
+          ]
+        }
+      ]
+    }
+  ],
   "zoomed_padding": true,
   "active_pane_modifiers": {
     "border_size": 2.0,
