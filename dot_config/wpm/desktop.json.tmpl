@@ -3,7 +3,11 @@
   "Unit": {
     "Name": "desktop",
     "Description": "Everything I need to work on Windows",
+    {{- if eq .chezmoi.hostname "drp-surf-w11"}}
+    "Requires:" : ["komokana"]
+    {{ else }}
     "Requires": ["komokana", "yasb"]
+    {{ end }}
   },
   "Resources": null,
   "Service": {
