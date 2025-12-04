@@ -1,6 +1,5 @@
 # ---t sheet how Environment Variables ---
 $Env:KOMOREBI_CONFIG_HOME = 'C:\Users\barbo\.config\komorebi'
-$Env:YAZI_FILE_ONE = 'C:\Users\barbo\scoop\apps\git\current\usr\bin\file.exe'
 
 # --- FZF Configuration (Hidden Files & Speed) ---
 # Requires 'fd' installed (scoop install fd)
@@ -8,20 +7,6 @@ $env:FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
 $env:FZF_CTRL_T_COMMAND  = $env:FZF_DEFAULT_COMMAND
 $env:FZF_ALT_C_COMMAND   = 'fd --type d --hidden --follow --exclude .git'
 
-# --- Yazi Wrapper Function ---
-function y {
-    $tmp = (New-TemporaryFile).FullName
-    try {
-        yazi $args --cwd-file="$tmp"
-        $cwd = Get-Content -Path $tmp -Encoding UTF8
-        if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
-            Set-Location -LiteralPath (Resolve-Path -LiteralPath $cwd).Path
-        }
-    }
-    finally {
-        if (Test-Path $tmp) { Remove-Item -Path $tmp }
-    }
-}
 
 # --- 1. Starship ---
 if (Get-Command starship -ErrorAction SilentlyContinue) {
