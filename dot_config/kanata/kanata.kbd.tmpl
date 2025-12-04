@@ -17,9 +17,14 @@
     wdmgmt (tap-hold 200 200 esc (layer-toggle window_c))
     spc_layer (tap-hold 200 300 spc (layer-toggle extended))
     os_app (one-shot 1000 (layer-toggle launcher))
+{{- if eq .chezmoi.os "darwin" }}
     smart_thumb (tap-hold-press 200 200 @os_app lmet)
     smart_thumb_r (tap-hold-press 200 200 @os_app rmet)
-
+{{end}}
+{{- if eq .chezmoi.os "windows" }}
+    smart_thumb (tap-hold-press 200 200 @os_app lctl)
+    smart_thumb_r (tap-hold-press 200 200 @os_app rctl)
+{{end}}
     ;; Smart Shift
 
     ;; --- SMART SHIFT COMPONENTS ---
@@ -38,6 +43,7 @@
 
 
   ;; --- APP SHORTCUTS ---
+{{- if eq .chezmoi.os "darwin" }}
   term M-C-S-A-t
   web  M-C-S-A-z
   kill M-q
@@ -47,7 +53,18 @@
   flmg M-C-S-A-f
   ai   M-C-S-A-a
   obsd M-C-S-A-o
-
+{{end}}
+{{- if eq .chezmoi.os "windows" }}
+  term M-C-S-A-t
+  web  M-C-S-A-z
+  kill M-q
+  code M-C-S-A-c
+  mail M-C-S-A-e
+  todo M-C-S-A-t
+  flmg M-C-S-A-f
+  ai   M-C-S-A-a
+  obsd M-C-S-A-o
+{{end}}
 
 
 ;; ___ COMMANDS Shortcuts __
@@ -71,15 +88,17 @@
   lsft @smart_sft
   lmet @smart_thumb
   rmet @smart_thumb_r
-  f1 🔅
+  lctl lmet
   f2 🔆
   f3 mctl
   f4 sls
-  f5 fn
   f6 lrld
   f10 🔇
   f11 🔉
   f12 🔊
+{{- if eq .chezmoi.os "darwin" }}
+  f5 fn
+{{end}}
 )
 
 
@@ -105,7 +124,7 @@ o @ocr
 p @clip
 s @shot
 caps caps
-f5 lrld
+f6 lrld
 a C-a
 ;;vim movement
 h left

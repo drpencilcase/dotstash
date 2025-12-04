@@ -1,6 +1,29 @@
 -- /Users/barbo/.config/wezterm/appearance.lua
--- Appearance settings for wezterm
 local wezterm = require 'wezterm'
+
+-- 1. Detect OS
+local is_windows = wezterm.target_triple:find("windows") ~= nil
+local is_darwin = wezterm.target_triple:find("darwin") ~= nil
+
+-- 2. Define Font Names based on OS
+-- Default to macOS names (Monaspace ...)
+local fonts = {
+    main        = 'Monaspace Neon NF',
+    italic      = 'Monaspace Xenon NF',
+    bold        = 'Monaspace Krypton NF',
+    bold_italic = 'Monaspace Xenon NF',
+}
+
+-- Override with Windows names if on Windows (Monaspice ...)
+if is_windows then
+    fonts.main        = 'MonaspiceNe Nerd Font'
+    fonts.italic      = 'MonaspiceXe Nerd Font'
+    fonts.bold        = 'MonaspiceKr Nerd Font'
+    fonts.bold_italic = 'MonaspiceXe Nerd Font'
+end
+
+-- 3. Define common settings
+local common_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' }
 
 local function get_appearance()
     if wezterm.gui then
@@ -17,6 +40,7 @@ local function scheme_for_appearance(appearance)
     end
 end
 
+-- 4. Build the Configuration
 local appearance_config = {
     color_scheme = scheme_for_appearance(get_appearance()),
     use_fancy_tab_bar = false,
@@ -33,79 +57,47 @@ local appearance_config = {
     warn_about_missing_glyphs = true,
     font_size = 14.0,
     line_height = 1.3,
-    harfbuzz_features = { "calt", "liga", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
-    font = wezterm.font_with_fallback {
-        { -- Normal text - first option
-            family = 'Monaspace Neon NF',
-            harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-            stretch = 'UltraCondensed', -- This doesn't seem to do anything
-        },
-        {                               -- Normal text - fallback option
-            family = 'MonaspiceNe NF',
-            harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-            stretch = 'UltraCondensed', -- This doesn't seem to do anything
-        },
+
+    -- Main Font (Neon / MonaspiceNe)
+    font = wezterm.font {
+        family = fonts.main,
+        harfbuzz_features = common_features,
     },
 
     font_rules = {
-        { -- Italic
+        { -- Italic (Xenon / MonaspiceXe)
             intensity = 'Normal',
             italic = true,
-            font = wezterm.font_with_fallback {
-                {
-                    family = 'Monaspace Xenon NF', -- courier-like
-                    style = 'Italic',
-                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-                },
-                {
-                    family = 'MonaspiceXe NF',
-                    style = 'Italic',
-                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-                },
+            font = wezterm.font {
+                family = fonts.italic,
+                style = 'Italic',
+                harfbuzz_features = common_features,
             }
         },
 
-        { -- Bold
+        { -- Bold (Krypton / MonaspiceKr)
             intensity = 'Bold',
             italic = false,
-            font = wezterm.font_with_fallback {
-                {
-                    family = 'Monaspace Krypton NF',
-                    weight = 'Bold',
-                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-                },
-                {
-                    family = 'MonaspiceKr NF',
-                    weight = 'Bold',
-                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-                },
+            font = wezterm.font {
+                family = fonts.bold,
+                weight = 'Bold',
+                harfbuzz_features = common_features,
             }
         },
 
-        { -- Bold Italic
+        { -- Bold Italic (Xenon / MonaspiceXe)
             intensity = 'Bold',
             italic = true,
-            font = wezterm.font_with_fallback {
-                {
-                    family = 'Monaspace Xenon NF',
-                    style = 'Italic',
-                    weight = 'Bold',
-                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-                },
-                {
-                    family = 'MonaspiceXe NF',
-                    style = 'Italic',
-                    weight = 'Bold',
-                    harfbuzz_features = { 'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08' },
-                },
+            font = wezterm.font {
+                family = fonts.bold_italic,
+                style = 'Italic',
+                weight = 'Bold',
+                harfbuzz_features = common_features,
             }
         },
     },
-
 }
 
-if is_windows() then
-    appearance_config.window_background_opacity = 0
-    appearance_config.win32_system_backdrop = 'Mica'
-end
+
+
 return appearance_config

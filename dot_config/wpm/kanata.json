@@ -5,7 +5,7 @@
     "Description": "Software keyboard remapper"
   },
   "Resources": {
-    "CONFIGURATION_FILE": "C:\\Users\\barbo\\.config\\kanata\\windows.kbd"
+    "CONFIGURATION_FILE": "C:\\Users\\barbo\\.config\\kanata\\kanata.kbd"
   },
   "Service": {
     "Kind": "Simple",

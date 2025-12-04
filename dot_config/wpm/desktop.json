@@ -9,8 +9,12 @@
   "Service": {
     "Kind": "Oneshot",
     "ExecStart": {
-      "Executable": "msg.exe",
-      "Arguments": ["*", "Desktop recipe completed!"]
+      "Executable": "cmd.exe",
+      "Arguments": [
+        "/c",
+        "start",
+        "raycast://extensions/raycast/raycast/confetti"
+      ]
     },
     "Restart": "Never"
   }

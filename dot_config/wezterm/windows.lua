@@ -1,30 +1,20 @@
--- I am helpers.lua and I should live in ~/.config/wezterm/helpers.lua
+-- I am windows.lua and I should live in ~/.config/wezterm/windows.lua
 
 local wezterm = require 'wezterm'
+-- FIX: Define 'act' so we can use it inside the callback
+local act = wezterm.action
 
 -- This is the module table that we will export
 local module = {}
 
--- This function is private to this module and is not visible
--- outside.
--- local function private_helper()
--- wezterm.log_error 'hello!'
--- end
-
--- define a function in the module table.
--- Only functions defined in `module` will be exported to
--- code that imports this module.
--- The suggested convention for making modules that update
--- the config is for them to export an `apply_to_config`
--- function that accepts the config object, like this:
 function module.apply_to_config(config)
     config.default_prog = { "pwsh.exe" }
+
     config.launch_menu = {
         {
             label = "PowerShell 7",
             args = { "pwsh.exe" },
         },
-
         {
             label = "Git Bash",
             args = { "C:\\Program Files\\Git\\bin\\bash.exe", "-l" },
@@ -38,9 +28,18 @@ function module.apply_to_config(config)
             args = { "cmd.exe" },
         },
     }
-    config.keys = {
+
+    -- FIX: Ensure config.keys exists before we try to add to it
+    if config.keys == nil then
+        config.keys = {}
+    end
+
+    local MOD = 'CTRL'
+
+    -- FIX: Use table.insert to append this keybinding instead of overwriting the whole list
+    table.insert(config.keys, {
         key = 'c',
-        mods = MOD, -- Thumb + C
+        mods = MOD, -- Uses the local variable defined above
         action = wezterm.action_callback(function(window, pane)
             local has_selection = window:get_selection_text_for_pane(pane) ~= ""
             if has_selection then
@@ -51,7 +50,7 @@ function module.apply_to_config(config)
                 window:perform_action(act.SendKey { key = 'c', mods = 'CTRL' }, pane)
             end
         end),
-    }
+    })
 end
 
 -- return our module table
