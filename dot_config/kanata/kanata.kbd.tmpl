@@ -137,3 +137,7 @@ w C-right
 {{- if eq .chezmoi.os "darwin" }}
 (include yabai.kbd)
 {{- end }}
+
+{{- if eq .chezmoi.os "windows" }}
+(include komorebi_w.kbd)
+{{- end }}
