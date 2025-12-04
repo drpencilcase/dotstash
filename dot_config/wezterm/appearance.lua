@@ -34,9 +34,9 @@ end
 
 local function scheme_for_appearance(appearance)
     if appearance:find 'Dark' then
-        return 'Everforest Dark (Gogh)'
+        return 'rose-pine-dawn'
     else
-        return 'Everforest Dark (Gogh)'
+        return 'rose-pine-dawn'
     end
 end
 
