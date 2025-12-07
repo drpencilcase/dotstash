@@ -19,6 +19,10 @@ sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 
+# window rules
+yabai -m rule --add app="^(Calculator|System Settings|Archive Utility)$" manage=off
+yabai -m rule --add app="^(Calculator|System Settings|Archive Utility)$" manage=off
+yabai -m rule --add app="wezterm" title="scratch" state=floating
 # global settings
 yabai -m config                                 \
     external_bar                 main:40:0       \
@@ -51,7 +55,7 @@ yabai -m config                                 \
     mouse_action2                resize         \
     mouse_drop_action            swap
 
-# --- apply user rules (keeps compatibility with existing rule files) ---
+# --- apply user rules  (keeps compatibility with existing rule files) ---
 yabai -m rule --apply
 
 # for sketchybar

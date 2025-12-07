@@ -53,8 +53,10 @@
   flmg M-C-S-A-f
   ai   M-C-S-A-a
   obsd M-C-S-A-o
+  down M-C-S-A-j
 {{end}}
 {{- if eq .chezmoi.os "windows" }}
+  down M-C-S-A-j
   term M-C-S-A-t
   web  M-C-S-A-z
   kill M-q
@@ -85,6 +87,12 @@
   caps @wdmgmt
   IntlBackslash `
   spc @spc_layer
+{{- if eq .chezmoi.os "darwin" }}
+  f5 fn
+  lmet @smart_thumb
+  rmet @smart_thumb_r
+
+{{ else }}
 {{- if eq .chezmoi.hostname "drp-surf-w11"}}
     lalt @smart_thumb
     lmet lalt
@@ -92,11 +100,10 @@
     ralt @smart_thumb_r
     ▤   ralt
 {{ else }}
-  lsft @smart_sft
-  lmet @smart_thumb
-  rmet @smart_thumb_r
   lctl lmet
 {{- end}}
+{{end}}
+  lsft @smart_sft
   f2 🔆
   f3 mctl
   f4 sls
@@ -104,9 +111,6 @@
   f10 🔇
   f11 🔉
   f12 🔊
-{{- if eq .chezmoi.os "darwin" }}
-  f5 fn
-{{end}}
 )
 
 
@@ -121,10 +125,23 @@ e @mail
 p @clip
 a @ai
 ;;t @todo
+j @down
 )
 
 
 (deflayermap (extended)
+  f1 f1
+  f2 f2
+  f3 f3
+  f4 f4
+  f5 f5
+  f6 f6
+  f7 f7
+  f8 f8
+  f9 f9
+  f10 f10
+  f11 f11
+  f12 f12
 IntlBackslash @chezmoi_edit
 ` @chezmoi_edit
 1 C-M-A-S-1
@@ -132,7 +149,6 @@ o @ocr
 p @clip
 s @shot
 caps caps
-f6 lrld
 a C-a
 ;;vim movement
 h left
