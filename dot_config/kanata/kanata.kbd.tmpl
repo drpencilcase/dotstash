@@ -1,182 +1,171 @@
-;; Kanata Config: Windows + Mac Muscle Memory + Smart Shift
-;; config for {{.chezmoi.hostname}}
+;; Config for {{.chezmoi.hostname}}
 
 (defcfg
   process-unmapped-keys yes
-  log-layer-changes no
-  danger-enable-cmd yes
-   concurrent-tap-hold yes)
-
-(defsrc
-
+  log-layer-changes     no
+  danger-enable-cmd     yes
+  concurrent-tap-hold   yes
 )
 
+(defsrc)
 
 (defalias
-    ;; --- LAYERS & SPECIALS ---
-    wdmgmt (tap-hold 200 200 esc (layer-toggle window_c))
-    spc_layer (tap-hold 200 300 spc (layer-toggle extended))
-    os_app (one-shot 1000 (layer-toggle launcher))
-{{- if eq .chezmoi.os "darwin" }}
-    smart_thumb (tap-hold-press 200 200 @os_app lmet)
-    smart_thumb_r (tap-hold-press 200 200 @os_app rmet)
-{{end}}
-{{- if eq .chezmoi.os "windows" }}
-    smart_thumb (tap-hold-press 200 200 @os_app lctl)
-    smart_thumb_r (tap-hold-press 200 200 @os_app rctl)
-{{end}}
-    ;; Smart Shift
+  ;; --- Layers & Specials ---
+  wdmgmt (tap-hold 200 200 esc (layer-toggle window_c))
+  spc_lr (tap-hold 200 300 spc (layer-toggle extended))
+  os_app (one-shot 1000 (layer-toggle launcher))
 
-    ;; --- SMART SHIFT COMPONENTS ---
-    ;; 1. One Shot Shift: Stays active for 1000ms after tapping
-    oneshot_sft (one-shot 1000 lsft)
+  {{- if eq .chezmoi.os "darwin" }}
+  thumb_l (tap-hold-press 200 200 @os_app lmet)
+  thumb_r (tap-hold-press 200 200 @os_app rmet)
+  {{- end }}
+  {{- if eq .chezmoi.os "windows" }}
+  thumb_l (tap-hold-press 200 200 @os_app lctl)
+  thumb_r (tap-hold-press 200 200 @os_app rctl)
+  {{- end }}
 
-    ;; 2. Caps Word: specialized caps lock that turns off after 2s or non-alpha key
-    caps_wrd    (caps-word 2000)
+  ;; --- Smart Shift ---
+  ;; Tap 1x = OneShot (1s), Tap 2x = CapsWord (2s), Hold = Shift
+  oneshot_sft (one-shot 1000 lsft)
+  caps_wrd    (caps-word 2000)
+  sft_dance   (tap-dance 500 (@oneshot_sft @caps_wrd))
+  smart_sft   (tap-hold 200 200 @sft_dance lsft)
 
-    ;; 3. The Dance: Tap 1x = OneShot, Tap 2x = CapsWord
-    ;; IMPORTANT: Actions must be inside ( ... )
-    sft_dance   (tap-dance 500 (@oneshot_sft @caps_wrd))
+  ;; --- App Shortcuts ---
+  {{- if eq .chezmoi.os "darwin" }}
+  term  M-C-S-A-t
+  web   M-C-S-A-z
+  kill  M-q
+  code  M-C-S-A-c
+  mail  M-C-S-A-e
+  todo  M-C-S-A-t
+  flmg  M-C-S-A-f
+  ai    M-C-S-A-a
+  obsd  M-C-S-A-o
+  down  M-C-S-A-j
+  {{- end }}
+  {{- if eq .chezmoi.os "windows" }}
+  term  M-C-S-A-t
+  web   M-C-S-A-z
+  kill  M-q
+  code  M-C-S-A-c
+  mail  M-C-S-A-e
+  todo  M-C-S-A-t
+  flmg  M-C-S-A-f
+  ai    M-C-S-A-a
+  obsd  M-C-S-A-o
+  down  M-C-S-A-j
+  {{- end }}
 
-    ;; 4. The Hold: Tap = Dance, Hold = Normal Shift
-    smart_sft   (tap-hold 200 200 @sft_dance lsft)
-
-
-  ;; --- APP SHORTCUTS ---
-{{- if eq .chezmoi.os "darwin" }}
-  term M-C-S-A-t
-  web  M-C-S-A-z
-  kill M-q
-  code M-C-S-A-c
-  mail M-C-S-A-e
-  todo M-C-S-A-t
-  flmg M-C-S-A-f
-  ai   M-C-S-A-a
-  obsd M-C-S-A-o
-  down M-C-S-A-j
-{{end}}
-{{- if eq .chezmoi.os "windows" }}
-  down M-C-S-A-j
-  term M-C-S-A-t
-  web  M-C-S-A-z
-  kill M-q
-  code M-C-S-A-c
-  mail M-C-S-A-e
-  todo M-C-S-A-t
-  flmg M-C-S-A-f
-  ai   M-C-S-A-a
-  obsd M-C-S-A-o
-{{end}}
-
-
-;; ___ COMMANDS Shortcuts __
-  ocr  M-C-S-o
-  chezmoi_edit(cmd /bin/launchctl asuser 501 /usr/bin/sudo -u barbo /opt/homebrew/bin/chezmoi edit --watch)
-  shot S-M-s
-  clip M-C-S-A-p
- )
-
-
-
+  ;; --- Commands ---
+  ocr   M-C-S-o
+  shot  S-M-s
+  clip  M-C-S-A-p
+  edit  (cmd /bin/launchctl asuser 501 /usr/bin/sudo -u barbo /opt/homebrew/bin/chezmoi edit --watch)
+)
 
 (defchordsv2
   (z x) (layer-while-held emoji) 50 first-release ()
 )
 
 (deflayermap (main)
-  caps @wdmgmt
+  caps          @wdmgmt
   IntlBackslash `
-  spc @spc_layer
-{{- if eq .chezmoi.os "darwin" }}
-  f5 fn
-  lmet @smart_thumb
-  rmet @smart_thumb_r
+  spc           @spc_lr
+  lsft          @smart_sft
 
-{{ else }}
-{{- if eq .chezmoi.hostname "drp-surf-w11"}}
-    lalt @smart_thumb
-    lmet lalt
-    lctl lmet
-    ralt @smart_thumb_r
-    ▤   ralt
-{{ else }}
+  {{- if eq .chezmoi.os "darwin" }}
+  f5   fn
+  lmet @thumb_l
+  rmet @thumb_r
+  {{- else }}
+    {{- if eq .chezmoi.hostname "drp-surf-w11"}}
+  lalt @thumb_l
+  lmet lalt
   lctl lmet
-{{- end}}
-{{end}}
-  lsft @smart_sft
-  f2 🔆
-  f3 mctl
-  f4 sls
-  f6 lrld
+  ralt @thumb_r
+  ▤    ralt
+    {{- else }}
+  lctl lmet
+    {{- end}}
+  {{- end}}
+
+
+  f2  🔆
+  f3  mctl
+  f4  sls
+  f6  lrld
   f10 🔇
   f11 🔉
   f12 🔊
 )
 
-
 (deflayermap (launcher)
-t @term
-z @web
-o @obsd
-q @kill
-c @code
-f @flmg
-e @mail
-p @clip
-a @ai
-;;t @todo
-j @down
+  t @term
+  z @web
+  o @obsd
+  q @kill
+  c @code
+  f @flmg
+  e @mail
+  p @clip
+  a @ai
+  j @down
 )
 
-
 (deflayermap (extended)
-  f1 f1
-  f2 f2
-  f3 f3
-  f4 f4
-  f5 f5
-  f6 f6
-  f7 f7
-  f8 f8
-  f9 f9
+  f1  f1
+  f2  f2
+  f3  f3
+  f4  f4
+  f5  f5
+  f6  f6
+  f7  f7
+  f8  f8
+  f9  f9
   f10 f10
   f11 f11
   f12 f12
-IntlBackslash @chezmoi_edit
-` @chezmoi_edit
-1 C-M-A-S-1
-o @ocr
-p @clip
-s @shot
-caps caps
-a C-a
-;;vim movement
-h left
-j down
-k up
-l right
-{{- if eq .chezmoi.os "darwin" }}
-b A-left
-w A-right
-{{- end }}
-{{- if eq .chezmoi.os "windows" }}
-b C-left
-w C-right
-{{- end }}
-)
-( deflayermap (emoji)
- r (unicode 🔴)
- o (unicode 🟠)
- g (unicode 🟢)
- y (unicode 🟡)
- n (unicode 🏥)
- i (unicode 🧊)
- h left
- j down
- k up
- l right
 
+  IntlBackslash @edit
+  `    @edit
+  1    C-M-A-S-1
+  o    @ocr
+  p    @clip
+  s    @shot
+  caps caps
+  a    C-a
+
+  ;; Vim Movement
+  h left
+  j down
+  k up
+  l right
+
+  {{- if eq .chezmoi.os "darwin" }}
+  b A-left
+  w A-right
+  {{- end }}
+  {{- if eq .chezmoi.os "windows" }}
+  b C-left
+  w C-right
+  {{- end }}
 )
+
+(deflayermap (emoji)
+  r (unicode 🔴)
+  o (unicode 🟠)
+  g (unicode 🟢)
+  y (unicode 🟡)
+  n (unicode 🏥)
+  i (unicode 🧊)
+
+  h left
+  j down
+  k up
+  l right
+)
+
 {{- if eq .chezmoi.os "darwin" }}
 (include yabai.kbd)
 {{- end }}
